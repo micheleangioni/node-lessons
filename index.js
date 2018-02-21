@@ -7,18 +7,18 @@ const retrieveJobs = (req, res) => {
   https.get('https://jobs.github.com/positions.json?description=python&location=sf&full_time=true', (response) => {
     let data = '' ;
 
-    response.on('data' , function (chunk) {
-      data += chunk.toString();
+    response.on('data', (chunk) => {
+      data += chunk;
     });
 
-    response.on('end' ,  function() {
-      res.json(data)
+    response.on('end', () => {
+      res.json(JSON.parse(data))
     });
   }).on('error', (e) => {
     console.error('ERROR');
     console.error(e);
   });
-}
+};
 
 app.get('/', retrieveJobs);
 
