@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
-const https = require('https');
 const fs = require('fs');
+const https = require('https');
 
 /**
  * This function could be heavily simplified or avoided by using the 'request' or 'axios' Node modules.
@@ -32,6 +32,19 @@ const addQueryParameters = (baseUrl, query, queryNames) => {
   return baseUrl
 };
 
+/**
+ * Save input data to file.
+ *
+ * @param {string} data
+ * @param {function} cb
+ */
+const saveToFile = (data, cb) => {
+  fs.writeFile('userdata/data.json', data, (err) => {
+    if (err) throw err;
+    cb();
+  });
+}
+
 const retrieveJobs = (req, res) => {
   let baseUrl = 'https://jobs.github.com/positions.json'
   let fullUrl = addQueryParameters(baseUrl, req.query, ['location', 'full_time'])
@@ -44,7 +57,7 @@ const retrieveJobs = (req, res) => {
     });
 
     response.on('end', () => {
-      res.json(JSON.parse(data))
+      saveToFile(data, () => res.json(JSON.parse(data)));
     });
   }).on('error', (e) => {
     console.error('ERROR');
