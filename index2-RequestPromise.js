@@ -4,11 +4,12 @@ const fs = require('fs');
 const rp = require('request-promise');
 
 /**
- * This function could be heavily simplified or avoided by using the 'request' or 'axios' Node modules.
+ * This function could be heavily simplified or avoided by using the 'axios' Node module.
  *
  * @param {string} baseUrl
- * @param {array} query
+ * @param {object} query
  * @param {array} queryNames
+ * @return {string}
  */
 const addQueryParameters = (baseUrl, query, queryNames) => {
   const values = queryNames.reduce((acc, queryName) => {
