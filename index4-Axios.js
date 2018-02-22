@@ -31,30 +31,33 @@ const getQueryParameters = (query, allowedNames) => {
  * Save input data to file.
  *
  * @param {string} data
- * @param {function} cb
+ * @return {Promise}
  */
-const saveToFile = (data, cb) => {
-  fs.writeFile('userdata/data.json', data, (err) => {
-    if (err) throw err;
-    cb();
-  });
+const saveToFile = (data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile('userdata/data.json', data, (err) => {
+      if (err) reject();
+      resolve(data);
+    });
+  })
 };
 
 const retrieveJobs = (req, res) => {
   const baseUrl = 'https://jobs.github.com/positions.json';
 
   axios.get(baseUrl, { params: getQueryParameters(req.query, ['location', 'full_time']) })
-    .then(response => {
-      let data = response.data
-
-      saveToFile(data, () => res.json(data));
-    })
+    .then(response => response.data)
+    .then(saveToFile)
+    .then(data => res.json(data))
     .catch(e => {
       console.error('ERROR');
       console.error(e);
     });
 };
 
+/**
+ * Middleware which logs to file.
+ */
 app.use((req, res, next) => {
   winston.info(`${moment().format('YYYY-MM-DD HH:mm:SS')}: Incoming ${req.method} request at ${req.url}`);
   next()

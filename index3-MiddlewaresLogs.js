@@ -42,13 +42,15 @@ const addQueryParameters = (baseUrl, query, queryNames) => {
  * Save input data to file.
  *
  * @param {string} data
- * @param {function} cb
+ * @return {Promise}
  */
-const saveToFile = (data, cb) => {
-  fs.writeFile('userdata/data.json', data, (err) => {
-    if (err) throw err;
-    cb();
-  });
+const saveToFile = (data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile('userdata/data.json', data, (err) => {
+      if (err) reject();
+      resolve(data);
+    });
+  })
 };
 
 const retrieveJobs = (req, res) => {
@@ -56,17 +58,18 @@ const retrieveJobs = (req, res) => {
   let fullUrl = addQueryParameters(baseUrl, req.query, ['location', 'full_time']);
 
   rp.get({uri: fullUrl, resolveWithFullResponse: true})
-    .then(response => {
-      let data = response.body;
-
-      saveToFile(data, () => res.json(JSON.parse(data)));
-    })
+    .then(response => response.body)
+    .then(saveToFile)
+    .then(data => res.json(JSON.parse(data)))
     .catch(e => {
       console.error('ERROR');
       console.error(e);
     });
 };
 
+/**
+ * Middleware which logs to file.
+ */
 app.use((req, res, next) => {
   winston.info(`${moment().format('YYYY-MM-DD HH:mm:SS')}: Incoming ${req.method} request at ${req.url}`);
   next()
