@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const moment = require('moment');
 const rp = require('request-promise');
+
+const winston = require('winston');
+winston.add(winston.transports.File, { filename: 'storage/logs/nodeJobs.log' });
+winston.remove(winston.transports.Console);
 
 /**
  * This function could be heavily simplified or avoided by using the 'request' or 'axios' Node modules.
@@ -45,7 +50,7 @@ const saveToFile = (data, cb) => {
   });
 };
 
-const retrieveJobs = (req, res) => {
+const retrieveJobs = (req, res, next) => {
   let baseUrl = 'https://jobs.github.com/positions.json';
   let fullUrl = addQueryParameters(baseUrl, req.query, ['location', 'full_time']);
 
@@ -60,6 +65,11 @@ const retrieveJobs = (req, res) => {
       console.error(e);
     });
 };
+
+app.use((req, res, next) => {
+  winston.info(`${moment().format('YYYY-MM-DD HH:mm:SS')}: Incoming ${req.method} request at ${req.url} at ${Date.now()}`);
+  next()
+});
 
 app.get('/', retrieveJobs);
 
