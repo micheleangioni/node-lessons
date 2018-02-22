@@ -50,7 +50,7 @@ const saveToFile = (data, cb) => {
   });
 };
 
-const retrieveJobs = (req, res, next) => {
+const retrieveJobs = (req, res) => {
   let baseUrl = 'https://jobs.github.com/positions.json';
   let fullUrl = addQueryParameters(baseUrl, req.query, ['location', 'full_time']);
 
@@ -67,10 +67,10 @@ const retrieveJobs = (req, res, next) => {
 };
 
 app.use((req, res, next) => {
-  winston.info(`${moment().format('YYYY-MM-DD HH:mm:SS')}: Incoming ${req.method} request at ${req.url} at ${Date.now()}`);
+  winston.info(`${moment().format('YYYY-MM-DD HH:mm:SS')}: Incoming ${req.method} request at ${req.url}`);
   next()
 });
 
 app.get('/', retrieveJobs);
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+app.listen(3000, () => console.log('App listening on port 3000!'));
