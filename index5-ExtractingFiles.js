@@ -1,12 +1,8 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
-const fs = require('fs');
-const moment = require('moment');
-
-const winston = require('winston');
-winston.add(winston.transports.File, { filename: 'storage/logs/nodeJobs.log' });
-winston.remove(winston.transports.Console);
+const dataLogger = require('./libraries/dataLogger');
+const fileLogger = require('./libraries/fileLogger');
 
 /**
  * This function could be heavily simplified or avoided by using the 'request' or 'axios' Node modules.
@@ -27,27 +23,12 @@ const getQueryParameters = (query, allowedNames) => {
   return queryObject;
 };
 
-/**
- * Save input data to file.
- *
- * @param {string} data
- * @return {Promise}
- */
-const saveToFile = (data) => {
-  return new Promise((resolve, reject) => {
-    fs.writeFile('userdata/data.json', data, (err) => {
-      if (err) reject();
-      resolve(data);
-    });
-  })
-};
-
 const retrieveJobs = (req, res) => {
   const baseUrl = 'https://jobs.github.com/positions.json';
 
   axios.get(baseUrl, { params: getQueryParameters(req.query, ['location', 'full_time']) })
     .then(response => response.data)
-    .then(saveToFile)
+    .then(dataLogger.saveToFile)
     .then(data => res.json(data))
     .catch(e => {
       console.error('ERROR');
@@ -56,12 +37,9 @@ const retrieveJobs = (req, res) => {
 };
 
 /**
- * Middleware which logs to file.
+ * Use fileLogger middleware.
  */
-app.use((req, res, next) => {
-  winston.info(`${moment().format('YYYY-MM-DD HH:mm:SS')}: Incoming ${req.method} request at ${req.url}`);
-  next()
-});
+app.use(fileLogger);
 
 app.get('/', retrieveJobs);
 
