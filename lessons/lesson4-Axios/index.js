@@ -1,41 +1,30 @@
 const express = require('express');
 const app = express();
+const axios = require('axios');
 const fs = require('fs');
 const moment = require('moment');
-const rp = require('request-promise');
 
 const winston = require('winston');
 winston.add(winston.transports.File, { filename: 'storage/logs/nodeJobs.log' });
 winston.remove(winston.transports.Console);
 
 /**
- * This function could be heavily simplified or avoided by using the 'axios' Node module.
+ * Get allowed query parameters and return them in an object.
  *
- * @param {string} baseUrl
  * @param {object} query
- * @param {array} queryNames
- * @return {string}
+ * @param {array} allowedNames
+ * @return {object}
  */
-const addQueryParameters = (baseUrl, query, queryNames) => {
-  const values = queryNames.reduce((acc, queryName) => {
-    if (query[queryName]) {
-      acc[queryName] = query[queryName];
+const getQueryParameters = (query, allowedNames) => {
+  let queryObject = {};
+
+  for (const queryName in query) {
+    if (allowedNames.includes(queryName)) {
+      queryObject[queryName] = query[queryName];
     }
-
-    return acc;
-  }, {});
-
-  let first = true;
-
-  for (const queryName in values) {
-    const queryValue = values[queryName];
-    baseUrl += first === true ? '?' : '&';
-    baseUrl += `${queryName}=${queryValue}`;
-
-    first = false;
   }
 
-  return baseUrl;
+  return queryObject;
 };
 
 /**
@@ -54,13 +43,12 @@ const saveToFile = (data) => {
 };
 
 const retrieveJobs = (req, res) => {
-  let baseUrl = 'https://jobs.github.com/positions.json';
-  let fullUrl = addQueryParameters(baseUrl, req.query, ['location', 'full_time']);
+  const baseUrl = 'https://jobs.github.com/positions.json';
 
-  rp.get({uri: fullUrl, resolveWithFullResponse: true})
-    .then(response => response.body)
+  axios.get(baseUrl, { params: getQueryParameters(req.query, ['location', 'full_time']) })
+    .then(response => response.data)
     .then(saveToFile)
-    .then(data => res.json(JSON.parse(data)))
+    .then(data => res.json(data))
     .catch(e => {
       console.error('ERROR');
       console.error(e);

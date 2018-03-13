@@ -1,11 +1,19 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const nconf = require('nconf');
 const dataLogger = require('./libraries/dataLogger');
 const fileLogger = require('./libraries/fileLogger');
+const models = require('./models/models')
+
+nconf.argv()
+  .env()
+  .file({ file: 'config/secrets.json' });
+
+const mongoose = require('./mongoose')
 
 /**
- * This function could be heavily simplified or avoided by using the 'request' or 'axios' Node modules.
+ * Get allowed query parameters and return them in an object.
  *
  * @param {object} query
  * @param {array} allowedNames
@@ -40,6 +48,18 @@ const retrieveJobs = (req, res) => {
  * Use fileLogger middleware.
  */
 app.use(fileLogger);
+
+/**
+ * Set Mongoose Client.
+ */
+app.set('mongooseClient', mongoose);
+
+/**
+ * Set Mongoose Models.
+ */
+models(app);
+
+const usersModel = app.get('usersModel');
 
 app.get('/', retrieveJobs);
 

@@ -4,7 +4,7 @@ const fs = require('fs');
 const rp = require('request-promise');
 
 /**
- * This function could be heavily simplified or avoided by using the 'axios' Node module.
+ * Add query parameters to input query.
  *
  * @param {string} baseUrl
  * @param {object} query

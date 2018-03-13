@@ -1,30 +1,41 @@
 const express = require('express');
 const app = express();
-const axios = require('axios');
 const fs = require('fs');
 const moment = require('moment');
+const rp = require('request-promise');
 
 const winston = require('winston');
 winston.add(winston.transports.File, { filename: 'storage/logs/nodeJobs.log' });
 winston.remove(winston.transports.Console);
 
 /**
- * This function could be heavily simplified or avoided by using the 'request' or 'axios' Node modules.
+ * Add query parameters to input query.
  *
+ * @param {string} baseUrl
  * @param {object} query
- * @param {array} allowedNames
- * @return {object}
+ * @param {array} queryNames
+ * @return {string}
  */
-const getQueryParameters = (query, allowedNames) => {
-  let queryObject = {};
-
-  for (const queryName in query) {
-    if (allowedNames.includes(queryName)) {
-      queryObject[queryName] = query[queryName];
+const addQueryParameters = (baseUrl, query, queryNames) => {
+  const values = queryNames.reduce((acc, queryName) => {
+    if (query[queryName]) {
+      acc[queryName] = query[queryName];
     }
+
+    return acc;
+  }, {});
+
+  let first = true;
+
+  for (const queryName in values) {
+    const queryValue = values[queryName];
+    baseUrl += first === true ? '?' : '&';
+    baseUrl += `${queryName}=${queryValue}`;
+
+    first = false;
   }
 
-  return queryObject;
+  return baseUrl;
 };
 
 /**
@@ -43,12 +54,13 @@ const saveToFile = (data) => {
 };
 
 const retrieveJobs = (req, res) => {
-  const baseUrl = 'https://jobs.github.com/positions.json';
+  let baseUrl = 'https://jobs.github.com/positions.json';
+  let fullUrl = addQueryParameters(baseUrl, req.query, ['location', 'full_time']);
 
-  axios.get(baseUrl, { params: getQueryParameters(req.query, ['location', 'full_time']) })
-    .then(response => response.data)
+  rp.get({uri: fullUrl, resolveWithFullResponse: true})
+    .then(response => response.body)
     .then(saveToFile)
-    .then(data => res.json(data))
+    .then(data => res.json(JSON.parse(data)))
     .catch(e => {
       console.error('ERROR');
       console.error(e);
