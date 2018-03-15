@@ -1,7 +1,7 @@
 {
-  "name": "nodejobs",
-  "version": "1.0.0",
-  "description": "Exercise",
+  "name": "node-lessons",
+  "version": "0.1.0",
+  "description": "Series of lessons to learn the basics of Node and Express.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
