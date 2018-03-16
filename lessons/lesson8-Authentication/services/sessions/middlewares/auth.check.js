@@ -1,7 +1,7 @@
 module.exports = (app, headers, context) => {
   const jwtManager = app.get('jwtManager');
 
-  // Check whetjer the Authorization header is present
+  // Check whether the Authorization header is present
 
   let authorization = headers.authorization;
 
@@ -22,7 +22,6 @@ module.exports = (app, headers, context) => {
   try {
     payload = jwtManager.verify(token)
   } catch(error) {
-    console.log('error due to verify:', error)
     /*
     error object structure:
 

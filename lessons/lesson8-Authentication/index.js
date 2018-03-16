@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 const bodyParser = require('body-parser');
-const jwtManager = require('./libraries/jwtManager');
+const JwtManager = require('./libraries/jwtManager');
 const nconf = require('nconf');
 const dataLogger = require('./libraries/dataLogger');
 const fileLogger = require('./libraries/fileLogger');
@@ -61,9 +61,9 @@ app.use(bodyParser.json());
 app.use(fileLogger);
 
 /**
- * Set Mongoose Client.
+ * Set Jwt Manager.
  */
-app.set('jwtManager', jwtManager(nconf.get('app_key')));
+app.set('jwtManager', JwtManager(nconf.get('app_key')));
 
 /**
  * Set Mongoose Client.
