@@ -429,6 +429,73 @@ router.post('/', (req, res) => {
 });
 ```
 
+### Lesson 9: Token Invalidation
+
+**Goals**
+- Build a `(DELETE) /sessions` API Endpoint to perform User logout. The provided Jwt must be put in an invalidated tokens list handled with Redis
+
+**Allowed Npm Packages**
+- `axios`: http client used to perform the (GET) http requests
+- `bcrypt`: password hasher
+- `body-parser`: Express middleware to parse the body requests
+- `express`: web server
+- `jsonwebtoken`: create and verify Json Web Tokens
+- `moment`: date manager
+- `mongoose`: MongoDB client
+- `nconf`: configuration files manager
+- `node-uuid`: library to generate uuids
+- `redis`: NodeJs Redis client
+- `winston`: logger
+
+**Requirements**
+- The results must be saved in `userdata/data.json`
+- The logs must be saved under `storage/logs/nodeJobs.log`
+- The Data Logger must reside into `libraries/dataLogger.js`
+- The File Logger must reside into `libraries/fileLogger.js`
+- The MongoDB configuration variables must reside into `config/secrets.json`, which **MUST** be gitignored
+- A `config/secrets.json.example` file must be provided, with the list of supported keys and example values of the `config/secrets.json` file
+- Configuration values must be loaded by using `nconf` directly at the beginning of the `index.js`
+- The Mongoose configuration must reside into a `mongoose.js` file, loaded directly from the `index.js`
+- The Mongoose client must be made available in Express under the `mongooseClient` key
+- The Users Model must be saved into `models/users.js` and have the following __Schema__ :
+
+  - username: String, required, unique
+  - email: String, unique
+  - password: string, required
+
+- The Users Model must be made available in Express under the `usersModel` key
+- The `/users` routes must be defined in the `services/users/users.router.js` file
+- Middlewares used in the `/users` endpoints must reside in the `services/users/middlewares/` folder
+- Use only `async` / `await` instead of pure Promises in all `/services/` files
+- User input validation errors must return a `422` Json response with `hasError: 1/0` and `error: <string>` keys
+- User passwords must be `bcrypt` hashed before being saved into the database
+- JWT management (creation and verification) must be handled in `libraries/jwtManager.js`, which must export a Javascript **Class**. It must be available in Express under the `jwtManager` key
+- The Secret Key used to create the tokens must be stored in the `secrets.json` file
+- `/sessions` routes must be defined in `services/sessions/sessions.router.js`
+- `/users` API Endpoints must check for authenticated users through the use of a `auth.check.js` middleware
+- HTTP Status Codes must be coherent: 401 is no authentication is provided, 403 is the token is expired or invalid
+- Communication with Redis server must happen entirely inside `libraries/redis.js` which must export a Javascript **Class**. It must be available in Express under the `redisClient` key
+- The `Redis` class constructor must take the Redis password as an argument, which must be saved into the `config/secrets.json` file. All methods inside `libraries/redis.js` must return a Promise
+- The second argument of the `JwtManager` must be the a `Redis` instance, in order to perform token invalidation
+- The `auth.check.js` middleware must also check if the token has been invalidated
+- The token invalidation of the `(DELETE) /sessions` route must happen inside a `token.invalidation.js` middleware
+
+**Suggestions**
+- It is useful to assign to each newly generated token a random **uuid**, saved under the `jti` field:
+
+```js
+jwt.sign({
+  data: {}
+}, this.secretKey, {
+  expiresIn: '4h',
+  jwtid: uuid.v4(), // uuid comes from 'const uuid = require('node-uuid');'
+  subject: userId.toString()
+});
+```
+
+- An efficient way to store invalidated tokens is to use a Redis **list**. Each user could have its own list
+- In order to avoid too large lists, each user key could have an expiration time, renewed every time a new token is added to the list
+
 ## Contribution guidelines
 
 Please follow the coding style defined in the `.eslintrc.json` file.
