@@ -14,7 +14,9 @@ module.exports = (app) => {
   router.get('/', (req, res) => {
     UsersModel.find()
       .then(data => {
-        res.json(data);
+        res.json(data.map(user => {
+          return { id: user._id, email: user.email, username: user.username };
+        }));
       })
   });
 
