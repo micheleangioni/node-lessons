@@ -1,12 +1,15 @@
 {
   "name": "node-lessons",
   "version": "0.1.0",
-  "description": "Series of lessons to learn the basics of Node and Express.",
+  "description": "Series of lessons to learn the basics of NodeJs and Express.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": {
+    "name": "Michele Angioni",
+    "email": "michele.angioni@gmail.com"
+  }
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
