@@ -38,10 +38,10 @@ module.exports = (http) => {
    * Setup Web Sockets.
    */
   io.on('connection', (socket) => {
-    socket.on('get random job', (location) => {
+    socket.on('jobRequest', (location) => {
       getRandomJob(location)
         .then(job => {
-          io.emit('get random job', job);
+          io.emit('randomJob', job);
         })
         .catch(e => {
           console.error('ERROR');
@@ -52,7 +52,7 @@ module.exports = (http) => {
     setInterval(() => {
       getRandomJob()
         .then(job => {
-          io.emit('get random job', `Random Job: ${job}`);
+          io.emit('randomJob', `Random Job: ${job}`);
         })
         .catch(e => {
           console.error('ERROR');
