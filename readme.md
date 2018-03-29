@@ -13,10 +13,10 @@ Since its low level nature, it will soon become important to rely on various npm
 The target of this course are Javascript programmers of all experience and level. Nevertheless, it is required a certain understanding of several basic Javascript and general concepts, such:
 
 - Basic array and object manipulation
-- Promises
+- [Promises](https://scotch.io/tutorials/javascript-promises-for-dummies)
 - Javascript modules importing through `require`
 - Basic understanding of REST APIs
-- Basic knowledge of MongoDB and Redis
+- Basic knowledge of [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/)
 
 In order to practice with Node Lessons the following software are needed to be installed:
 
@@ -43,27 +43,27 @@ Suggestions can be read before starting to code or only after getting stuck, it 
 
 ### Lessons:
 
-**[Lesson 1: Create a base Github Jobs inspector](lessons/lesson1-BaseWebServer/other_file.md)**
+**[Lesson 1: Create a base Github Jobs inspector](lessons/lesson1-BaseWebServer/readme.md)**
 
-**Lesson 2: Use 'request-promise' instead of NodeJs' 'https' as an HTTP client**
+**[Lesson 2: Use 'request-promise' instead of NodeJs' 'https' as an HTTP client](lessons/lesson2-RequestPromise/readme.md)**
 
-**Lesson 3: Add an Express Middleware which Logs each incoming request**
+**[Lesson 3: Add an Express Middleware which Logs each incoming request](lessons/lesson3-MiddlewareLogs/readme.md)**
 
-**Lesson 4: Use Axios as HTTP client**
+**[Lesson 4: Use Axios as HTTP client](lessons/lesson4-Axios/readme.md)**
 
-**Lesson 5: Split our single-file application into different modules**
+**[Lesson 5: Split our single-file application into different modules](lessons/lesson5-Modularization/readme.md)**
 
-**Lesson 6: Use Mongoose to connect to a Mongo database**
+**[Lesson 6: Use Mongoose to connect to a Mongo database](lessons/lesson6-Mongoose/readme.md)**
 
-**Lesson 7: Build a simple Users REST API**
+**[Lesson 7: Build a simple Users REST API](lessons/lesson7-SimpleUsersApi/readme.md)**
 
-**Lesson 8: Add Authentication**
+**[Lesson 8: Add Authentication](lessons/lesson8-Authentication/readme.md)**
 
-**Lesson 9: Add a Logout endpoint**
+**[Lesson 9: Add a Logout endpoint](lessons/lesson9-TokenInvalidation/readme.md)**
 
-**Lesson 10: Add Web Sockets with SocketIo**
+**[Lesson 10: Add Web Sockets with SocketIo](lessons/lesson10-SocketIo/readme.md)**
 
-**Lesson 11: UserMakeAdminCliCommand**
+**[Lesson 11: Create a UserMakeAdmin Cli Command](lessons/lesson11-UserMakeAdminCliCommand/readme.md)**
 
 ## Contribution guidelines
 
