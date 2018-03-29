@@ -1,11 +1,20 @@
 # Node Lessons
 
-### Lesson 11: UserMakeAdminCliCommand
+### Lesson 11: Create a UserMakeAdmin Cli Command
 
 **Description**
+As every Application, we need to define a special class of users who may have particular rights, such as accessing to a specific area of the Website, ban other users or simply see some statistics.
+Let's give the possibilities to our Users to became Admin.
+
+For sure this is not something we want for all users, so the users themselves must not have the possibility to turn themselves into Admin.
+We could, for example, give the possibility for an Admin to turn other users into Admins. But then who creates the very first Admin?
+
+One solution is to create a CLI Command, to be run directly on the server, which turns an existing User into ad Admin.
+For this, use [commander.js](https://github.com/tj/commander.js) to create a `user-make-admin -u <email>` command,
+which takes the email of a user and turns it into ad admin setting the `admin` field of the user record to true.
 
 **Goals**
-- Build a CLI Command to turn existing Users into admins by using [commander.js](https://github.com/tj/commander.js)
+- Build a CLI Command to turn existing Users into Admins by using [commander.js](https://github.com/tj/commander.js)
 
 **Allowed Npm Packages**
 - `axios`: http client used to perform the (GET) http requests
@@ -61,7 +70,7 @@
 - There must be a CLI Command with signature `user-make-admin -u <email>` which turns existing users into admins
 
 **Suggestions**
-- In order to make the `commander` CLI commands speak with the database, the code related to MongoDb and Mongoose could be rewritten directly into the command itself. However that would lead to severe code duplication (imagine having several CLI commands) which would greatly worse code maintenability. A better way consists to import existing files into the command itself, by making use of an express instance:
+- In order to make the `commander` CLI commands speak with the database, the code related to MongoDb and Mongoose could be rewritten directly into the command itself. However that would lead to severe code duplication (imagine having several CLI commands) which would greatly worse code maintenability. A better way consists of importing existing files into the command itself, by making use of an Express instance:
 
 ```js
 // user-make-admin.js
@@ -84,3 +93,5 @@ let program = require('commander');
 
 [...]
 ```
+
+- Sometimes in order to end a NodeJs process, it is necessary to explicitily call `process.exit(0)`
