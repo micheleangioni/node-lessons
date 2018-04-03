@@ -3,7 +3,7 @@ const baseUrl = 'https://jobs.github.com/positions.json';
 
 const getRandomJob = (location = null) => {
   return new Promise((resolve, reject) => {
-    let params = {}
+    let params = {};
 
     if (location) {
       params.location = location;

@@ -25,19 +25,19 @@ module.exports = async (app, data, context) => {
       // Hash random string to protect against timing attacks
       bcrypt.hashSync('random', saltRounds);
 
-      throw new Error({
+      throw {
         code: 403,
         message: 'Wrong credentials.'
-      });
+      };
     }
 
     // Verify the Password
 
     if (await !bcrypt.compare(data.password, user.password)) {
-      throw new Error({
+      throw {
         code: 403,
         message: 'Wrong credentials.'
-      });
+      };
     }
 
     // Save the User id in the context object to make it available after the middleware ran
@@ -45,9 +45,9 @@ module.exports = async (app, data, context) => {
   }
 
   if (errors.length > 0) {
-    throw new Error({
+    throw {
       code: 422,
       message: errors.join(' ')
-    });
+    };
   }
 };
