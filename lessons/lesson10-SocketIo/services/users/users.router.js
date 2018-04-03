@@ -10,11 +10,16 @@ module.exports = (app) => {
   const UsersModel = app.get('usersModel');
 
   /**
-   * Add Authentication Middleware to all routes.
+   * Add Authentication Middleware to all routes, except User registration.
    */
   router.use('/', async function (req, res, next) {
     if (!req.context) {
       req.context = {};
+    }
+
+    if (req.path === '/' && req.method === 'POST') {
+      next();
+      return;
     }
 
     try {
