@@ -20,10 +20,10 @@ router.post('/', (req, res) => {
 
     res.set('Authorization', `Bearer ${token}`);
 
-    // Send back the json response
+    // Send back the User data as json response
   });
 ```
-this will be read and stored by the client and sent back to each subsequent request to the server
+this will be read and stored by the client and sent back to each subsequent request to the server. The response will send back the data of the logged in User
 
 2. A middleware which acts on each protected route (i.e. each route which needs an authenticated user to be accessed) and check whether the request has a valid token
 
@@ -116,15 +116,21 @@ jwt.sign({
 });
 ```
 
-- When checking for login validation, in case of success it is useful to save the authenticated user id into the request, so that it is available later
+- When checking for login validation, in case of success it is useful to save the authenticated user id and user data into the request, so that it is available later
 
 ```js
 // login.validation.js
 
 module.exports = async (app, data, context) => {
-  [...] // Perform Login Validation and retrieve the userId
+  [...] // Perform Login Validation and retrieve the user data
 
-  context.id = userId;
+  context.id = user._id;
+  context.user = {
+    id: user._id,
+    email: user.email,
+    username: user.username,
+    admin: user.admin || false
+  };
 };
 ```
 
@@ -146,8 +152,20 @@ router.post('/', async (req, res, next) => {
 });
 
 router.post('/', (req, res) => {
-  // req.context.id is now available here!
+  // req.context.user is now available here!
 
   [...]
 });
+```
+
+- Let's save the user id also in the auth check middleware
+
+```js
+// auth.check.js
+
+module.exports = async (app, data, context) => {
+  [...] // Check whether the user is authenticated
+
+  context.id = userId;
+};
 ```

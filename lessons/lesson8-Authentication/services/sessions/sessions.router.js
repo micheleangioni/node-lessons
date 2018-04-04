@@ -28,7 +28,7 @@ module.exports = (app) => {
     const token = jwtManager.createToken(req.context.id);
 
     res.set('Authorization', `Bearer ${token}`);
-    res.json({ message: 'Login successfully performed.' });
+    res.json({ data: req.context.user });
   });
 
   return router;

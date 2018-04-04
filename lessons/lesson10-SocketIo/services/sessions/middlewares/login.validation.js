@@ -42,6 +42,12 @@ module.exports = async (app, data, context) => {
 
     // Save the User id in the context object to make it available after the middleware ran
     context.id = user._id;
+    context.user = {
+      id: user._id,
+      email: user.email,
+      username: user.username,
+      admin: user.admin || false
+    };
   }
 
   if (errors.length > 0) {
