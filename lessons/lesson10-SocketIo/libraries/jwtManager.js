@@ -8,9 +8,9 @@ class JwtManager
    * @param {object} redis
    */
   constructor (secretKey, redis) {
-    this.secretKey = secretKey
+    this.secretKey = secretKey;
 
-    this.redis = redis
+    this.redis = redis;
   }
 
   /**

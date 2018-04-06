@@ -37,11 +37,12 @@ const getQueryParameters = (query, allowedNames) => {
 
 const retrieveJobs = (req, res) => {
   const baseUrl = 'https://jobs.github.com/positions.json';
+  let data;
 
   axios.get(baseUrl, { params: getQueryParameters(req.query, ['location', 'full_time']) })
-    .then(response => response.data)
-    .then(dataLogger.saveToFile)
-    .then(data => res.json(data))
+    .then(response => { return data = response.data })
+    .then(() => { return dataLogger.saveToFile(JSON.stringify(data)) })
+    .then(() => res.json(data))
     .catch(e => {
       console.error('ERROR');
       console.error(e);

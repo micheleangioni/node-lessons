@@ -6,7 +6,7 @@ class JwtManager
    * @param {string} secretKey
    */
   constructor(secretKey) {
-    this.secretKey = secretKey
+    this.secretKey = secretKey;
   }
 
   /**
