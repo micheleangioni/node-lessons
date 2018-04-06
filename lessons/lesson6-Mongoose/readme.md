@@ -29,7 +29,7 @@ In order to then load those variables into the application, let's use [nconf](ht
 - Add a `users` Mongoose Model
 
 **Allowed Npm Packages**
-- `axios`: http client used to perform the (GET) http requests
+- `axios`: http client used to perform http requests
 - `express`: web server
 - `moment`: date manager
 - `mongoose`: MongoDB client

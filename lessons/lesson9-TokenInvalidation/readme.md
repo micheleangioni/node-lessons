@@ -33,7 +33,7 @@ Remember to modify the Authentication checker middleware, created in Lesson 8, i
 - Build a `(DELETE) /sessions` API Endpoint to perform User logout. The provided Jwt must be put in an invalidated tokens list handled with Redis
 
 **Allowed Npm Packages**
-- `axios`: http client used to perform the (GET) http requests
+- `axios`: http client used to perform http requests
 - `bcrypt`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `express`: web server

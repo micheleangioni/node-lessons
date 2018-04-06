@@ -22,7 +22,7 @@ and allows to use a [more traditional syntax](https://javascript.info/async-awai
 - A `(PUT) /users/:id` API Endpoint must be available to update a User and return the updated user. Only email and username can be updated.
 
 **Allowed Npm Packages**
-- `axios`: http client used to perform the (GET) http requests
+- `axios`: http client used to perform http requests
 - `bcrypt`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `express`: web server

@@ -14,13 +14,15 @@ It will then automatically emit an event `randomJob` to the consumer (i.e. the c
 It must also listen to the `'jobRequest'` event, with a location string as data.
 It will then fetch a random job with the received location parameter (still from the public Github Jobs API) and emit an event `randomJob` with the found job.
 
+In order to test the backend API, you can use [serve](https://github.com/zeit/serve) to use a simple frontend, located in the `index.html` file of the lesson folder.
+
 **Goals**
 - Build a Web Socket `/random-jobs` Endpoint by using [socket.io](https://socket.io/)
 - The endpont should be able to receive a `jobRequest` event with a `location` data and answer with a random job from the free Gihub Jobs API
 - Once connected to the Web Socket endpoint, every 3 seconds it should automatically send a random job, taken from the same API and without location filter, to the connected client via a `randomJob` event
 
 **Allowed Npm Packages**
-- `axios`: http client used to perform the (GET) http requests
+- `axios`: http client used to perform http requests
 - `bcrypt`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `express`: web server

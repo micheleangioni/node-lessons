@@ -13,7 +13,7 @@ Those modules will then be loeaded from our main `index.js` file.
 - Move the Data Logger and the File Logger into separated files
 
 **Allowed Npm Packages**
-- `axios`: http client used to perform the (GET) http requests
+- `axios`: http client used to perform http requests
 - `express`: web server
 - `moment`: date manager
 - `winston`: logger

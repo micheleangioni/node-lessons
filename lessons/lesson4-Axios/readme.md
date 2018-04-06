@@ -12,7 +12,7 @@ Replace `request-promise` with Axios all along the application.
 - Use `axios` as http client instead of `request-promise`
 
 **Allowed Npm Packages**
-- `axios`: http client used to perform the (GET) http requests
+- `axios`: http client used to perform http requests
 - `express`: web server
 - `moment`: date manager
 - `winston`: logger

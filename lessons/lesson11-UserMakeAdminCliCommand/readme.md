@@ -17,7 +17,7 @@ which takes the email of a user and turns it into ad admin setting the `admin` f
 - Build a CLI Command to turn existing Users into Admins by using [commander.js](https://github.com/tj/commander.js)
 
 **Allowed Npm Packages**
-- `axios`: http client used to perform the (GET) http requests
+- `axios`: http client used to perform http requests
 - `bcrypt`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `commander`: library to build NodeJs CLI commands

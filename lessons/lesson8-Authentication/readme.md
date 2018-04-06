@@ -32,7 +32,7 @@ this will be read and stored by the client and sent back to each subsequent requ
 - All `/users` routes must be now private, i.e. only authenticated users can access them
 
 **Allowed Npm Packages**
-- `axios`: http client used to perform the (GET) http requests
+- `axios`: http client used to perform http requests
 - `bcrypt`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `express`: web server
