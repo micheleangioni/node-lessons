@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+  <link rel="shortcut icon" type="image/x-icon" href="statics/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" integrity="sha256-/8+sU56ayrJGahG9mmcUaNEghbavaceGybkdqO96Kk0=" crossorigin="anonymous" />
+
+  <title>NodeLessons Client</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font: 13px Helvetica, Arial; }
+    form { background: #000; padding: 3px; }
+    form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+    form button { background: rgb(130, 224, 255); border: none; padding: 10px; }
+    button { cursor: pointer; }
+
+    form#event-form { position: fixed; bottom: 0; width: 100%; }
+    form#event-form button { width: 9%; }
+
+    #loggedin, #r-message { color: white; }
+
+    #messages { list-style-type: none; margin: 0; padding: 0; }
+    #messages li { padding: 5px 10px; }
+    #messages li:nth-child(odd) { background: #eee; }
+  </style>
+
+</head>
+<body>
+<!-- Status / Admin Top Bar -->
+<form id="admin-form" action="">
+  <div id="loggedin">
+    <span>Logged in</span>
+    <button class="admin">Get Admin Statistics</button>
+    <span id="adminStatisticsRequest" class="admin"></span>
+  </div>
+</form>
+
+<!-- Registration Form -->
+<form id="registration-form" action="">
+    <div id="registration" class="row">
+        <div class="col-xs-3">
+            <input id="r-email" placeholder="email"/>
+        </div>
+        <div class="col-xs-3">
+            <input id="r-username" placeholder="username"/>
+        </div>
+        <div class="col-xs-3">
+            <input id="r-password" placeholder="password" type="password" />
+        </div>
+        <div class="col-xs-2">
+            <button>Register</button>
+        </div>
+    </div>
+    <div id="r-message"></div>
+</form>
+
+<!-- Login Form -->
+<form id="login-form" action="">
+  <div id="login" class="row">
+    <div class="col-xs-5">
+      <input id="email" placeholder="email"/>
+    </div>
+    <div class="col-xs-5">
+      <input id="password" placeholder="password" type="password" />
+    </div>
+    <div class="col-xs-2">
+      <button>Login</button>
+    </div>
+  </div>
+</form>
+
+<!-- Jobs list -->
+<ul id="messages"></ul>
+<form id="event-form" action="">
+  <input id="m" autocomplete="off" /><button>Send Event</button>
+</form>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<script>
+  $(function () {
+    $('#r-message').hide();
+    $('#loggedin').hide();
+    $('.admin').hide();
+
+    function registerListeners (socket) {
+      // Listen for the 'randomJob' event
+      socket.on('randomJob', function (msg) {
+        $('#messages').append($('<li>').text(msg));
+      });
+    }
+
+    // Open a Web Sockets connection
+    var socket = io.connect('localhost:3000', {
+      'path': '/random-jobs'
+    });
+
+    // Emit the 'jobRequest' event
+    $('#event-form').submit(function () {
+      socket.emit('jobRequest', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+
+    // Register the default listeners
+    registerListeners(socket);
+
+    // Perform registration
+
+    $('#registration-form').submit(function () {
+      var inputs = {
+        email: $("#r-email").val(),
+        username: $("#r-username").val(),
+        password: $("#r-password").val()
+      };
+
+      $.post('http://localhost:3000/users', inputs, function (response, status, xhr) {
+        $('#registration').hide();
+        $('#r-message').html('New user successfully registered').show();
+      }).fail(response => {
+        $('#r-message').html(response.responseJSON.error).show();
+      });
+
+      return false;
+    });
+
+    // Perform login
+
+    $('#login-form').submit(function () {
+      var inputs = {
+        email: $("#email").val(),
+        password: $("#password").val()
+      };
+
+      $.post('http://localhost:3000/sessions', inputs, function (response, status, xhr) {
+        // If an Authorization header is returned, use the token to Authenticate to the Web Sockets channel
+        var authorization = xhr.getResponseHeader('authorization');
+
+        if (authorization) {
+          var token = authorization.split(' ')[1];
+
+          socket.disconnect();
+
+          socket = io.connect('localhost:3000', {
+            'path': '/random-jobs/?token=' + token
+          });
+
+          registerListeners(socket);
+
+          $('#registration').hide();
+          $('#login').hide();
+          $('#loggedin').show();
+        }
+
+        if (response.data.admin === true) {
+          $('.admin').show();
+
+          // Emit the 'adminStatisticsRequest' event
+          $('#admin-form').submit(function () {
+            socket.emit('adminStatisticsRequest');
+            return false;
+          });
+
+          // Listen for the 'randomJob' event
+          socket.on('adminStatistics', function (statistics) {
+            $( "#adminStatisticsRequest" ).html('Available Jobs: ' + statistics.availableJobs);
+          });
+        }
+      });
+
+      return false;
+    });
+  });
+</script>
+</html>
