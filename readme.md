@@ -65,6 +65,8 @@ Suggestions can be read before starting to code or only after getting stuck, it 
 
 **[Lesson 11: Create a UserMakeAdmin Cli Command](lessons/lesson11-UserMakeAdminCliCommand/readme.md)**
 
+**[Lesson 12: Create a socket.io room for Admin Users](lessons/lesson12-AdminSocketIoRoom/readme.md)**
+
 ## Contribution guidelines
 
 Please follow the coding style defined in the `.eslintrc.json` file.
