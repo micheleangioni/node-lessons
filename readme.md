@@ -67,6 +67,8 @@ Suggestions can be read before starting to code or only after getting stuck, it 
 
 **[Lesson 12: Create a socket.io room for Admin Users](lessons/lesson12-AdminSocketIoRoom/readme.md)**
 
+**[Lesson 13: Allow for image profile upload using AWS to store them](lessons/lesson13-ImageUploadWithAWS/readme.md)**
+
 ## Contribution guidelines
 
 Please follow the coding style defined in the `.eslintrc.json` file.
