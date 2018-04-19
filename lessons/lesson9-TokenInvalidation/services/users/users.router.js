@@ -129,7 +129,10 @@ module.exports = (app) => {
     };
 
     UsersModel.findOneAndUpdate({ _id: req.params.id }, data, (err, user) => {
-      if (err) res.status(500).json({ hasError: 1, error: err });
+      if (err) {
+        res.status(500).json({ hasError: 1, error: err });
+        return;
+      }
 
       if (!user) {
         res.status(404).json({ hasError: 1, error: 'User not found.' });
