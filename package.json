@@ -19,6 +19,7 @@
     "commander": "^2.15.1",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
+    "dynamoose": "^0.8.7",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.2.0",
     "moment": "^2.20.1",
