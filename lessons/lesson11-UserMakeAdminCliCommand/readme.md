@@ -47,6 +47,7 @@ which takes the email of a user and turns it into ad admin setting the `admin` f
   - username: String, required, unique
   - email: String, unique
   - password: string, required
+  - admin: boolean, default: false
 
 - The Users Model must be made available in Express under the `usersModel` key
 - The `/users` routes must be defined in the `services/users/users.router.js` file by using the Express router
