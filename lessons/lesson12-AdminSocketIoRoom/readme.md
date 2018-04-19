@@ -62,6 +62,7 @@ app.options('*', cors({
 - `node-uuid`: library to generate uuids
 - `redis`: NodeJs Redis client
 - `socket.io`: Web Socket management library
+- `validator`: string validation library
 - `winston`: logger
 
 **Requirements**

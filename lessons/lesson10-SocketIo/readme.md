@@ -33,6 +33,7 @@ In order to test the backend API, you can use [serve](https://github.com/zeit/se
 - `node-uuid`: library to generate uuids
 - `redis`: NodeJs Redis client
 - `socket.io`: Web Socket management library
+- `validator`: string validation library
 - `winston`: logger
 
 **Requirements**

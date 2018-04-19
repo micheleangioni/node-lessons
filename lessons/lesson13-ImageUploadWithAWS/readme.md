@@ -56,6 +56,7 @@ This would also avoid to hardcode the image url in our application.
 - `node-uuid`: library to generate uuids
 - `redis`: NodeJs Redis client
 - `socket.io`: Web Socket management library
+- `validator`: string validation library
 - `winston`: logger
 
 **Requirements**

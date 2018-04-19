@@ -40,6 +40,7 @@ this will be read and stored by the client and sent back to each subsequent requ
 - `moment`: date manager
 - `mongoose`: MongoDB client
 - `nconf`: configuration files manager
+- `validator`: string validation library
 - `winston`: logger
 
 **Requirements**

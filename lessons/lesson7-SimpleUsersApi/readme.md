@@ -29,6 +29,7 @@ and allows to use a [more traditional syntax](https://javascript.info/async-awai
 - `moment`: date manager
 - `mongoose`: MongoDB client
 - `nconf`: configuration files manager
+- `validator`: string validation library
 - `winston`: logger
 
 **Requirements**
@@ -109,3 +110,5 @@ router.put('/:id', async (req, res, next) => {
   [...]
 }
 ```
+
+- In order to validate user inputs, [validator](https://github.com/chriso/validator.js/) can be very helpful

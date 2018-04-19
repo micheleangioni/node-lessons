@@ -43,6 +43,7 @@ Remember to modify the Authentication checker middleware, created in Lesson 8, i
 - `nconf`: configuration files manager
 - `node-uuid`: library to generate uuids
 - `redis`: NodeJs Redis client
+- `validator`: string validation library
 - `winston`: logger
 
 **Requirements**

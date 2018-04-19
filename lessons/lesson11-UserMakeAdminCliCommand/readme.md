@@ -29,6 +29,7 @@ which takes the email of a user and turns it into ad admin setting the `admin` f
 - `node-uuid`: library to generate uuids
 - `redis`: NodeJs Redis client
 - `socket.io`: Web Socket management library
+- `validator`: string validation library
 - `winston`: logger
 
 **Requirements**
