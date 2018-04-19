@@ -5,20 +5,7 @@ const loginValidation = require('./middlewares/login.validation');
 module.exports = (app) => {
   // Check user credentials
 
-  router.post('/', async (req, res, next) => {
-    if (!req.context) {
-      req.context = {};
-    }
-
-    try {
-      await loginValidation(app, req.body, req.context);
-    } catch (error) {
-      res.status(error.code).json({ hasError: 1, error: error.message });
-      return;
-    }
-
-    next();
-  });
+  router.post('/', loginValidation);
 
   /**
    * Authenticate the User by creating a new token.

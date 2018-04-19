@@ -1,5 +1,4 @@
 const express = require('express');
-const { ObjectId } = require('mongodb');
 const router = express.Router();
 const authCheck = require('./../sessions/middlewares/auth.check');
 const encryptPassword = require('./middlewares/encryptPassword');
@@ -92,29 +91,11 @@ module.exports = (app) => {
 
   // Validation Middleware.
 
-  router.post('/', async (req, res, next) => {
-    try {
-      await usersValidationNew(app, req.body);
-    } catch (error) {
-      res.status(422).json({ hasError: 1, error: error.toString() });
-      return;
-    }
-
-    next();
-  });
+  router.post('/', usersValidationNew);
 
   // Encrypt Password Middleware.
 
-  router.post('/', (req, res, next) => {
-    try {
-      req.body = encryptPassword(app, req.body);
-    } catch (error) {
-      res.status(422).json({ hasError: 1, error: error.toString() });
-      return;
-    }
-
-    next();
-  });
+  router.post('/', encryptPassword);
 
   /**
    * Create a new User.
@@ -133,21 +114,7 @@ module.exports = (app) => {
 
   // Validation Middleware.
 
-  router.put('/:id', async (req, res, next) => {
-    if (!ObjectId.isValid(req.params.id)) {
-      res.status(422).json({ hasError: 1, error: 'Invalid User Id.' });
-      return;
-    }
-
-    try {
-      await usersValidationUpdate(app, req.body);
-    } catch (error) {
-      res.status(422).json({ hasError: 1, error: error.toString() });
-      return;
-    }
-
-    next();
-  });
+  router.put('/:id', usersValidationUpdate);
 
   /**
    * Update a User.
@@ -189,7 +156,6 @@ module.exports = (app) => {
     try {
       data = await s3client.getSignedUrl(profileImagesBucketName, filename, req.query.fileType)
     } catch (e) {
-      console.log('ERROR', e)
       res.status(500).json({ hasError: 1, error: 'Internal error, could not get signed url, try again later.' });
       return;
     }

@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-module.exports = (app, data) => {
+module.exports = (req, res, next) => {
+  let data = req.body;
   let errors = [];
 
   // Check whether there is the `password` property
@@ -16,8 +17,9 @@ module.exports = (app, data) => {
   // but it is a good practice to always use it
 
   if (errors.length > 0) {
-    throw new Error(errors.join(' '));
+    res.status(422).json({ hasError: 1, error: error.toString() });
+    return;
   }
 
-  return data;
+  next();
 };

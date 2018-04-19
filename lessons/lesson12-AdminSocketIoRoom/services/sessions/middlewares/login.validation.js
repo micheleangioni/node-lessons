@@ -1,10 +1,15 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-module.exports = async (app, data, context) => {
-  const UsersModel = app.get('usersModel');
+module.exports = async (req, res, next) => {
+  const UsersModel = req.app.get('usersModel');
 
+  let data = req.body;
   let errors = [];
+
+  if (!req.context) {
+    req.context = {};
+  }
 
   if (!data.email || !data.password) {
     if (!data.email) {
@@ -25,24 +30,20 @@ module.exports = async (app, data, context) => {
       // Hash random string to protect against timing attacks
       bcrypt.hashSync('random', saltRounds);
 
-      throw {
-        code: 403,
-        message: 'Wrong credentials.'
-      };
+      res.status(403).json({ hasError: 1, error: 'Wrong credentials.' });
+      return;
     }
 
     // Verify the Password
 
     if (await !bcrypt.compare(data.password, user.password)) {
-      throw {
-        code: 403,
-        message: 'Wrong credentials.'
-      };
+      res.status(403).json({ hasError: 1, error: 'Wrong credentials.' });
+      return;
     }
 
     // Save the User id and data in the context object to make it available after the middleware ran
-    context.id = user._id;
-    context.user = {
+    req.context.id = user._id;
+    req.context.user = {
       id: user._id,
       email: user.email,
       username: user.username,
@@ -51,9 +52,9 @@ module.exports = async (app, data, context) => {
   }
 
   if (errors.length > 0) {
-    throw {
-      code: 422,
-      message: errors.join(' ')
-    };
+    res.status(error.code).json({ hasError: 1, error: errors.join(' ') });
+    return;
   }
+
+  next();
 };

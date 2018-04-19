@@ -1,8 +1,9 @@
 const validator = require('validator');
 
-module.exports = async (app, data) => {
-  const UsersModel = app.get('usersModel');
+module.exports = async (req, res, next) => {
+  const UsersModel = req.app.get('usersModel');
 
+  let data = req.body;
   let errors = [];
 
   // Check whether there is the `username` property
@@ -43,6 +44,9 @@ module.exports = async (app, data) => {
   }
 
   if (errors.length > 0) {
-    throw new Error(errors.join(' '));
+    res.status(422).json({ hasError: 1, error: errors.join(' ') });
+    return;
   }
+
+  next();
 };

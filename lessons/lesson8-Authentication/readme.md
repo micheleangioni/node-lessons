@@ -68,7 +68,7 @@ this will be read and stored by the client and sent back to each subsequent requ
 - JWT management (creation and verification) must be handled in `libraries/jwtManager.js`, which must export a Javascript **Class**. It must be available in Express under the `jwtManager` key
 - The Secret Key used to create the tokens must be stored in the `secrets.json` file
 - `/sessions` routes must be defined in `services/sessions/sessions.router.js`
-- `/users` API Endpoints must check for authenticated users through the use of a `auth.check.js` middleware
+- `/users` API Endpoints must check for authenticated users through the use of a `auth.check.js` function or middleware
 - HTTP Status Codes must be coherent: 401 if no authentication is provided (i.e. token not found in the `Authorization` header, 403 if the token is expired or invalid
 
 **Suggestions**
@@ -122,44 +122,40 @@ jwt.sign({
 ```js
 // login.validation.js
 
-module.exports = async (app, data, context) => {
+module.exports = async (req, res, next) => {
+  if (!req.context) {
+    req.context = {};
+  }
+
   [...] // Perform Login Validation and retrieve the user data
 
-  context.id = user._id;
-  context.user = {
+  req.context.id = user._id;
+  req.context.user = {
     id: user._id,
     email: user.email,
     username: user.username,
     admin: user.admin || false
   };
+
+  [...]
 };
 ```
 
 ```js
 // sessions.router.js
 
-router.post('/', async (req, res, next) => {
-  if (!req.context) {
-    req.context = {};
-  }
-
-  try {
-    await loginValidation(app, req.body, req.context);
-  } catch (error) {
-    // Handle error
-  }
-
-  next();
-});
+[...]
 
 router.post('/', (req, res) => {
   // req.context.user is now available here!
 
   [...]
 });
+
+[...]
 ```
 
-- Let's save the user id also in the auth check middleware
+- Let's save the user id also in the auth check function
 
 ```js
 // auth.check.js

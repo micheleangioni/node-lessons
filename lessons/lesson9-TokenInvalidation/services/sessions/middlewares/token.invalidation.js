@@ -1,18 +1,21 @@
-module.exports = async (app, headers) => {
-  const jwtManager = app.get('jwtManager');
+module.exports = async (req, res, next) => {
+  const jwtManager = req.app.get('jwtManager');
+  const headers = req.headers;
 
   // Check whether the Authorization header is present
 
   let authorization = headers.authorization;
 
   if (!authorization || !(authorization.search('Bearer ') === 0)) {
-    throw { name: 'UserNotAuthenticated', message: 'User is not authenticated.' };
+    res.status(401).json({ hasError: 1, message: 'User is not authenticated.' });
+    return;
   }
 
   let token = authorization.split(' ')[1];
 
   if (!token) {
-    throw { name: 'UserNotAuthenticated', message: 'Token not found.' };
+    res.status(422).json({ hasError: 1, message: 'Token not found.' });
+    return;
   }
 
   // Verify the Token
@@ -32,9 +35,17 @@ module.exports = async (app, headers) => {
     }
     */
 
-    throw error;
+    res.status(401).json({ hasError: 1, message: 'Invalid token.' });
+    return;
   }
 
   // Invalidate the token
-  await jwtManager.invalidate(payload.sub, payload.jti);
+  try {
+    await jwtManager.invalidate(payload.sub, payload.jti);
+  } catch(error) {
+    res.status(500).json({ hasError: 1, message: 'Internal error.' });
+    return;
+  }
+
+  next();
 };

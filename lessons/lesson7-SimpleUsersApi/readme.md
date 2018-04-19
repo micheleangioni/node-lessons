@@ -80,35 +80,7 @@ const usersValidationNew = require('./middlewares/users.validation.new');
 
 // Validation Middleware.
 
-router.post('/', async (req, res, next) => {
-  try {
-    await usersValidationNew(app, req.body);
-  } catch (error) {
-    res.status(422).json({ hasError: 1, error: error.toString() });
-    return;
-  }
-
-  next();
-});
-```
-
-- Use `mongodb`'s `ObjectId` to check whether input User id is a valid id:
-
-```js
-// services/users/users.router.js
-
-[...]
-  const { ObjectId } = require('mongodb');
-[...]
-
-router.put('/:id', async (req, res, next) => {
-  if (!ObjectId.isValid(req.params.id)) {
-    res.status(422).json({ hasError: 1, error: 'Invalid User Id.' });
-    return;
-  }
-
-  [...]
-}
+router.post('/', usersValidationNew);
 ```
 
 - In order to validate user inputs, [validator](https://github.com/chriso/validator.js/) can be very helpful

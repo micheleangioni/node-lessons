@@ -6,20 +6,7 @@ const tokenInvalidation = require('./middlewares/token.invalidation');
 module.exports = (app) => {
   // Check user credentials
 
-  router.post('/', async (req, res, next) => {
-    if (!req.context) {
-      req.context = {};
-    }
-
-    try {
-      await loginValidation(app, req.body, req.context);
-    } catch (error) {
-      res.status(error.code).json({ hasError: 1, error: error.message });
-      return;
-    }
-
-    next();
-  });
+  router.post('/', loginValidation);
 
   /**
    * Authenticate the User by creating a new token.
@@ -35,16 +22,7 @@ module.exports = (app) => {
   /**
    * Token invalidation.
    */
-  router.delete('/', async (req, res, next) => {
-    try {
-      await tokenInvalidation(app, req.headers)
-    } catch (error) {
-      res.status(500).json({ hasError: 1, message: 'Internal error.' });
-      return;
-    }
-
-    next();
-  });
+  router.delete('/', tokenInvalidation);
 
   /**
    * Logout by invalidating the token.
