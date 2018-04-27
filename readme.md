@@ -69,6 +69,8 @@ Suggestions can be read before starting to code or only after getting stuck, it 
 
 **[Lesson 13: Allow for image profile upload using AWS to store them](lessons/lesson13-ImageUploadWithAWS/readme.md)**
 
+**[Lesson 14: Switch to AWS DynamoDB in place of MongoDB](lessons/lesson14-SwitchToAWSDynamoDB/readme.md)**
+
 ## Contribution guidelines
 
 Please follow the coding style defined in the `.eslintrc.json` file.
