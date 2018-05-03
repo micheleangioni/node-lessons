@@ -1,16 +1,16 @@
 # Node Lessons
 
-> Node Lessons are a series of exercises aimed to learn the basics of NodeJs and Express.
+> Node Lessons is a series of exercises aimed to learn the basics of NodeJs and [Express](https://expressjs.com/).
 
 ## Introduction
 
 Even for experienced Javascript programmers, learning the basics of NodeJs can be tough.
-The number of guides, tutorials and articles can be overwhelming and, even though NodeJs after years of crazy and almost hysteric development has entered a more mature era of its life, the number of libraries, plugins and frameworks to choose from can leave the new users quite confused.
+The number of guides, tutorials and articles can be overwhelming and, even though after years of crazy and almost hysteric development NodeJs has entered a more mature era of its life, the number of libraries, plugins and frameworks to choose from can leave new users quite disorient.
 
-These lessons will guide new users to explore the potential of Express, the most used framework to build Web back ends with NodeJs.
-Since its low level nature, it will soon become important to rely on various npm packages to avoid drowning in the complexities of low level Javascript.
+These lessons act as a guide aimed to explore the potential of Express, the most used framework to build Web Back-ends with NodeJs.
+Since its low level nature, it will soon become important to rely on various external npm packages to avoid drowning in the complexities of low level Javascript.
 
-The target of this course are Javascript programmers of all experience and level. Nevertheless, it is required a certain understanding of several basic Javascript and general concepts, such:
+The target of this course are Javascript programmers of all experience and level. Nevertheless, it is required a certain understanding of several basic Javascript and general concepts, such as:
 
 - Basic array and object manipulation
 - [Promises](https://scotch.io/tutorials/javascript-promises-for-dummies)
@@ -24,6 +24,12 @@ In order to practice with Node Lessons the following software are needed to be i
 - MongoDB server
 - Redis server
 
+In later lessons, the integration of various [Amazon Web Services (AWS)](https://aws.amazon.com/) will be presented.
+
+In order to follow these lesson, it is suggested to create a new AWS account to benefit of the initial [free tier](https://aws.amazon.com/free/).
+Nevertheless, it is possible to incur in some costs (they shouldn't be more than a few euros, if no serious errors are done while experimenting).
+In any case we do **NOT** take any responsability for any cost readers could be subject to.
+
 ## Installation
 
 Just clone the repo and run `npm install` to install the needed dependencies.
@@ -31,7 +37,7 @@ Just clone the repo and run `npm install` to install the needed dependencies.
 ## Lessons
 
 The `/lessons` folder contains the list of lessons of this course.
-Each lesson contains a `readme` file with the detailed exaplanation of the lesson itself and an implemetation of the code required to fulfill the requirements of it.
+Each lesson contains a `readme` file with the detailed explanation of the lesson itself and an implemetation of the code required to fulfill the requirements.
 
 Each lesson has an exhaustive **description**, a list of **goals**, a list of **allowed npm packages**, some **requirements** and a few **suggestions**.
 
@@ -45,9 +51,9 @@ Suggestions can be read before starting to code or only after getting stuck, it 
 
 **[Lesson 1: Create a base Github Jobs inspector](lessons/lesson1-BaseWebServer/readme.md)**
 
-**[Lesson 2: Use 'request-promise' instead of NodeJs' 'https' as an HTTP client](lessons/lesson2-RequestPromise/readme.md)**
+**[Lesson 2: Use 'request-promise' instead of NodeJs' 'https' as HTTP client](lessons/lesson2-RequestPromise/readme.md)**
 
-**[Lesson 3: Add an Express Middleware which Logs each incoming request](lessons/lesson3-MiddlewareLogs/readme.md)**
+**[Lesson 3: Add an Express Middleware which logs each incoming request](lessons/lesson3-MiddlewareLogs/readme.md)**
 
 **[Lesson 4: Use Axios as HTTP client](lessons/lesson4-Axios/readme.md)**
 

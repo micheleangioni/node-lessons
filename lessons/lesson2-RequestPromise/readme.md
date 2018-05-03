@@ -1,6 +1,6 @@
 # Node Lessons
 
-### Lesson 2: Use 'request-promise' instead of NodeJs' 'https' as an HTTP client
+### Lesson 2: Use 'request-promise' instead of NodeJs' 'https' as HTTP client
 
 **Description**
 NodeJs' `https` module is quite low level, so it requires some manual tweaking.

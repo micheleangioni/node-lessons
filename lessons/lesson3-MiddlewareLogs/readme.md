@@ -1,6 +1,6 @@
 # Node Lessons
 
-### Lesson 3: Add an Express Middleware which Logs each incoming request
+### Lesson 3: Add an Express Middleware which logs each incoming request
 
 **Description**
 [Middlewares](https://expressjs.com/en/guide/using-middleware.html) are a fundamental part of each Express application, allowing to filter or modify the request data, verify Authentication or perform certain actions under certain conditions.
