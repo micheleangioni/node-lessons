@@ -30,8 +30,8 @@ Create then a `s3client.js` file in the `libraries` folder, which will act as a 
 
 Add then a PUT endpoint `'/:id/image/signed-url` to the users service. It will have to retrieve the `fileType` request query parameter, call the `s3client.js` library to create a signed url and return it to the client.
 
-In order to keep our code simple, we assume here that a User always has an profile image, which is not true for newly registered user.
-We then leave to the frontend the burden to check whether the image really exists and, if not, use a default image.
+In order to keep our code simple, we assume here that a User has always a profile image, which is actually not true for newly registered user.
+We then leave to the Front-end the burden to check whether the image really exists and, if not, to use a default image.
 
 Things can of course be done differently, for example saving into the `users` collection of the database the url of the uploaded image.
 This would also avoid to hardcode the image url in our application.
@@ -111,9 +111,10 @@ This would also avoid to hardcode the image url in our application.
     3. Click on `Users` on the left side menu
     4. Click on the blue `Add user` button and complete the required steps
     5. You will be given the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` assiged to the user
+    6. From the user page, click on `Add permissions` and select `AmazonS3FullAccess ` from `Attach existing policies directly` to grant the user complete S3 access.
 
 - The `s3client.js` needs two methods: `createBucket (name)` and `getSignedUrl (bucket, filename, fileType)`.
-    1. `createBucket (name)` must first check whether the bucket already exists by using `s3.headBucket({ Bucket: name }, (err, data) => { ... })`. In case it does not exists, a new bucket must be created with `s3.createBucket(settings, (err, data) => { ... })`. On successful creation, CORS must be setup calling `this.s3.putBucketCors(params, function(err, corsData) { ... })`, where `params` is
+    1. `createBucket (name)` must first check whether the bucket already exists by using `s3.headBucket({ Bucket: name }, (err, data) => { ... })`. In case it does not exists, a new bucket must be created with `s3.createBucket(settings, (err, data) => { ... })`. On successful creation, CORS must be setup for the Bucket by calling `this.s3.putBucketCors(params, function(err, corsData) { ... })`, where `params` is
 
     ```js
     const params = {
@@ -177,7 +178,7 @@ This would also avoid to hardcode the image url in our application.
     [...]
     ```
 
-- Several tutorials which shows how to correctly integrate AWS'S3 service into a NodeJs application are available on the web.
+- Several tutorials which show how to correctly integrate AWS S3 service into a NodeJs application are available on the web.
     One that I find really well written is [Heroku's one](https://devcenter.heroku.com/articles/s3-upload-node), from which I've personally taken inspiration writing this lesson
 
 
