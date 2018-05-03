@@ -41,6 +41,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 (!) Remember to generate a User Id when creating a new User in the `users.router.js` file. A simple UUID generated through `uuid` will make the work.
 
+(!!) In order to be able to interact with DynamoDB, the AWS user must have the right permissions. For example, we can add the `AmazonDynamoDBFullAccess` policy to the user through the [AWS Console](https://console.aws.amazon.com/iam).
+
 **Goals**
 - Switch from MongoDB to DynamoDB, by using `dynamoose` in place of `mongoose` to interact with the database
 
