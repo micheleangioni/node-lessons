@@ -77,6 +77,8 @@ Suggestions can be read before starting to code or only after getting stuck, it 
 
 **[Lesson 14: Switch to AWS DynamoDB in place of MongoDB](lessons/lesson14-SwitchToAWSDynamoDB/readme.md)**
 
+**[Lesson 15: Use AWS Lambda to process Admin statistics](lessons/lesson15-UseAWSLambdaForAdminStats/readme.md)**
+
 ## Contribution guidelines
 
 Please follow the coding style defined in the `.eslintrc.json` file.
