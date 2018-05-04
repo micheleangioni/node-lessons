@@ -1,0 +1,19 @@
+{
+  "LambdaFunctionConfigurations": [
+    {
+      "Id": "ObjectCreatedEvents",
+      "Filter": {
+        "Key": {
+          "FilterRules": [
+            {
+              "Name": "Prefix",
+              "Value": "jobSearch"
+            }
+          ]
+        }
+      },
+      "LambdaFunctionArn": "<LAMBDA FUNCTION ARN>",
+      "Events": ["s3:ObjectCreated:*"]
+    }
+  ]
+}
