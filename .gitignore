@@ -1,4 +1,24 @@
+# Package managers
 node_modules
 
+# IDEs and editors
 .idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
+# Linux
+*~
+
+# OSX
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+#Windows
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
