@@ -1,5 +1,4 @@
 const express = require('express');
-const nconf = require('nconf');
 const util = require('util');
 const uuid = require('node-uuid');
 const router = express.Router();
