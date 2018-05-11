@@ -14,7 +14,7 @@ The target of this course are Javascript programmers of all experience and level
 
 - Basic array and object manipulation
 - [Promises](https://scotch.io/tutorials/javascript-promises-for-dummies)
-- Javascript modules importing through `require`
+- CommonJs Javascript module format
 - Basic understanding of REST APIs
 - Basic knowledge of [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/)
 
