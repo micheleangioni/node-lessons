@@ -44,11 +44,11 @@ const saveToFile = (data, cb) => {
     if (err) throw err;
     cb();
   });
-}
+};
 
 const retrieveJobs = (req, res) => {
-  let baseUrl = 'https://jobs.github.com/positions.json'
-  let fullUrl = addQueryParameters(baseUrl, req.query, ['location', 'full_time'])
+  let baseUrl = 'https://jobs.github.com/positions.json';
+  let fullUrl = addQueryParameters(baseUrl, req.query, ['location', 'full_time']);
 
   https.get(fullUrl, (response) => {
     let data = '' ;
