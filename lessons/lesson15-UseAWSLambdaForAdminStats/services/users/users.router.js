@@ -7,6 +7,16 @@ const encryptPassword = require('./middlewares/encryptPassword');
 const usersValidationNew = require('./middlewares/users.validation.new');
 const usersValidationUpdate = require('./middlewares/users.validation.update');
 
+const profileImagesBucketName = 'nodelessons-profile-images';
+
+async function createBucket (s3client) {
+  try {
+    await s3client.createBucket(profileImagesBucketName);
+  } catch (e) {
+    console.log('Error', e)
+  }
+}
+
 /**
  * Return the profile image url for input user.
  *
@@ -19,6 +29,9 @@ function getProfileImageFilename (userId) {
 
 module.exports = (app) => {
   const s3client = app.get('s3client');
+
+  // Let's create an S3 bucket to store profile images
+  createBucket(s3client);
 
   const UsersModel = app.get('usersModel');
   const UsersQueryOne = util.promisify(UsersModel.queryOne);
