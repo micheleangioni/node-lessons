@@ -12,7 +12,7 @@ As all REST APIs, proper [HTTP status codes](https://en.wikipedia.org/wiki/List_
 
 Do not forget to hash user passwords before storing it into the database. One of the most widely used hashing algorithm is [bcrypt](https://github.com/kelektiv/node.bcrypt.js).
 
-Lastly, optionally use the new ES6 [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function](async / await) feature in all Services files.
+Lastly, optionally use the new ES6 [async / await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) feature in all Services files.
 It is often [simpler to use than pure Promises](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
 and allows to use a [more traditional syntax](https://javascript.info/async-await).
 
