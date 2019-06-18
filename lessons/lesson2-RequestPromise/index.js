@@ -42,10 +42,10 @@ const addQueryParameters = (baseUrl, query, queryNames) => {
 const saveToFile = (data) => {
   return new Promise((resolve, reject) => {
     fs.writeFile('userdata/data.json', data, (err) => {
-      if (err) reject();
+      if (err) return reject();
       resolve(data);
     });
-  })
+  });
 };
 
 const retrieveJobs = (req, res) => {

@@ -10,7 +10,7 @@ Let's use it in place of `https`.
 Additionally, let's wrap all NodeJs functions, which use callbacks, into custom functions which return a Promise.
 
 **Goals**
-- Simplify the http client code by using `request-promise`
+- Simplify the http client code by using `request-promise` in place of `https`
 
 **Allowed Npm Packages**
 - `express`: web server
@@ -26,7 +26,7 @@ Additionally, let's wrap all NodeJs functions, which use callbacks, into custom 
 ```js
 return new Promise((resolve, reject) => {
   fs.writeFile('userdata/data.json', data, (err) => {
-    if (err) reject();
+    if (err) return reject();
     resolve(data);
   });
 })
