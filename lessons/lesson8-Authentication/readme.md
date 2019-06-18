@@ -33,7 +33,7 @@ this will be read and stored by the client and sent back to each subsequent requ
 
 **Allowed Npm Packages**
 - `axios`: http client used to perform http requests
-- `bcrypt`: password hasher
+- `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `express`: web server
 - `jsonwebtoken`: create and verify Json Web Tokens

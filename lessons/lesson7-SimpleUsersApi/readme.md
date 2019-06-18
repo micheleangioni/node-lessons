@@ -23,7 +23,7 @@ and allows to use a [more traditional syntax](https://javascript.info/async-awai
 
 **Allowed Npm Packages**
 - `axios`: http client used to perform http requests
-- `bcrypt`: password hasher
+- `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `express`: web server
 - `moment`: date manager

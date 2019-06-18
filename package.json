@@ -14,7 +14,7 @@
   "dependencies": {
     "aws-sdk": "^2.224.1",
     "axios": "^0.18.0",
-    "bcrypt": "^1.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "commander": "^2.15.1",
     "cors": "^2.8.4",

@@ -23,7 +23,7 @@ In order to test the backend API, you can use [serve](https://github.com/zeit/se
 
 **Allowed Npm Packages**
 - `axios`: http client used to perform http requests
-- `bcrypt`: password hasher
+- `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `express`: web server
 - `jsonwebtoken`: create and verify Json Web Tokens

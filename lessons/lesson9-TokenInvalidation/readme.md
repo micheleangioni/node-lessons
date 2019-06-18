@@ -34,7 +34,7 @@ Remember to modify the Authentication checker middleware, created in Lesson 8, i
 
 **Allowed Npm Packages**
 - `axios`: http client used to perform http requests
-- `bcrypt`: password hasher
+- `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `express`: web server
 - `jsonwebtoken`: create and verify Json Web Tokens

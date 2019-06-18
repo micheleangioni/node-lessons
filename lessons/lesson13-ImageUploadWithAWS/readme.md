@@ -43,7 +43,7 @@ This would also avoid to hardcode the image url in our application.
 **Allowed Npm Packages**
 - `axios`: http client used to perform http requests
 - `aws-sdk`: Amazon Web Services client
-- `bcrypt`: password hasher
+- `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
 - `commander`: library to build NodeJs CLI commands
 - `cors`: CORS configuration for Express
