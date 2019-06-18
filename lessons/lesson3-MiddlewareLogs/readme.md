@@ -3,9 +3,9 @@
 ### Lesson 3: Add an Express Middleware which logs each incoming request
 
 **Description**
-[Middlewares](https://expressjs.com/en/guide/using-middleware.html) are a fundamental part of each Express application, allowing to filter or modify the request data, verify Authentication or perform certain actions under certain conditions.
+[Middlewares](https://expressjs.com/en/guide/using-middleware.html) are a fundamental part of each Express application, which allow to filter or modify the request data, verify Authentication or perform certain actions under certain conditions.
 
-In our case, in order to case confidence with Middleware, let's add a middleware which simply logs each incoming request to our application.
+In our case, in order to gain confidence with middlewares, let's add a middleware which simply logs each incoming request to our application.
 
 **Goals**
 - Every time the Web Server is hit, a log to file must be written by using [winstone](https://github.com/winstonjs/winston), containing the timestamp, the request method and url. Winstone must be used in a global Express application middleware
@@ -23,11 +23,13 @@ In our case, in order to case confidence with Middleware, let's add a middleware
 **Suggestions**
 - Use `moment` to handle a proper date format to be logged into file
 
-- A general middleware, which will run on all incoming requests, can be defined like so:
+- Follow the instructions in the readme of the Winstone's GitHub project page to setup a basic logger
+
+- A global middleware, which will run on all incoming requests, can be defined like so (**before** the routes definition):
 
 ```js
 app.use((req, res, next) => {
-  // Code that must run
+  // Code that runs at every request coming to our application
 
   next()
 });

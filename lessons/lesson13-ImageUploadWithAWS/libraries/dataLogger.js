@@ -10,10 +10,10 @@ const dataLogger = {
   saveToFile (data) {
     return new Promise((resolve, reject) => {
       fs.writeFile('userdata/data.json', data, (err) => {
-        if (err) reject();
+        if (err) return reject();
         resolve(data);
       });
-    })
+    });
   },
 
   /**
@@ -24,10 +24,10 @@ const dataLogger = {
   readFile () {
     return new Promise((resolve, reject) => {
       fs.readFile('userdata/data.json', (err, data) => {
-        if (err) reject();
+        if (err) return reject();
         resolve(JSON.parse(data));
       });
-    })
+    });
   }
 };
 

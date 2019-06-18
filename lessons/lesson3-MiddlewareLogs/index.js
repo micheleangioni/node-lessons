@@ -47,10 +47,10 @@ const addQueryParameters = (baseUrl, query, queryNames) => {
 const saveToFile = (data) => {
   return new Promise((resolve, reject) => {
     fs.writeFile('userdata/data.json', data, (err) => {
-      if (err) reject();
+      if (err) return reject();
       resolve(data);
     });
-  })
+  });
 };
 
 const retrieveJobs = (req, res) => {
@@ -72,7 +72,7 @@ const retrieveJobs = (req, res) => {
  */
 app.use((req, res, next) => {
   winston.info(`${moment().format('YYYY-MM-DD HH:mm:SS')}: Incoming ${req.method} request at ${req.url}`);
-  next()
+  next();
 });
 
 app.get('/', retrieveJobs);
