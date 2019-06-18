@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
   // but it is a good practice to always use it
 
   if (errors.length > 0) {
-    res.status(422).json({ hasError: 1, error: error.toString() });
+    res.status(422).json({ hasError: 1, error: errors.toString() });
     return;
   }
 

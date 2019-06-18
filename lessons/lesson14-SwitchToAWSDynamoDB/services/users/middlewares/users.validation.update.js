@@ -58,7 +58,7 @@ module.exports = async (req, res, next) => {
   }
 
   if (errors.length > 0) {
-    res.status(422).json({ hasError: 1, error: error.toString() });
+    res.status(422).json({ hasError: 1, error: errors.toString() });
     return;
   }
 
