@@ -30,7 +30,7 @@ const addQueryParameters = (baseUrl, query, queryNames) => {
     first = false;
   }
 
-  return baseUrl
+  return baseUrl;
 };
 
 /**
