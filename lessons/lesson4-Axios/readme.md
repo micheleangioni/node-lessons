@@ -3,10 +3,10 @@
 ### Lesson 4: Use Axios as HTTP client
 
 **Description**
-[Axios](https://github.com/axios/axios) is probably the most used HTTP client both back and frontend.
-Its super simply API makes creating HTTP requests a joke, yet allowing a deep configuration customization making itself ideal for all use cases.
+[Axios](https://github.com/axios/axios) is probably the most used HTTP client both Back and Frontend.
+Its simple API makes creating HTTP requests a joke, yet allowing a deep configuration customization making itself ideal for all use cases.
 
-Replace `request-promise` with Axios all along the application.
+Replace `request-promise` with Axios in the whole application.
 
 **Goals**
 - Use `axios` as http client instead of `request-promise`

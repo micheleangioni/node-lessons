@@ -61,7 +61,7 @@ const retrieveJobs = (req, res) => {
  */
 app.use((req, res, next) => {
   winston.info(`${moment().format('YYYY-MM-DD HH:mm:SS')}: Incoming ${req.method} request at ${req.url}`);
-  next()
+  next();
 });
 
 app.get('/', retrieveJobs);

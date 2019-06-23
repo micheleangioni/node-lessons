@@ -3,11 +3,11 @@
 ### Lesson 5: Split our single-file application into different modules
 
 **Description**
-When an application becomes larger, keeping everything is one large file gets things quickly messy.
+When an application becomes larger, keeping everything is one large file makes things messy quickly.
 In order to improve the readability of the code, and thus the maintenability of the whole application, it is useful to split the code into different files, i.e. modules.
 
 Let's put the code of the request logging into `libraries/fileLogger.js` and the code which saves the results to file into `libraries/dataLogger.js`.
-Those modules will then be loeaded from our main `index.js` file.
+Those modules will then be loaded by our main `index.js` file.
 
 **Goals**
 - Move the Data Logger and the File Logger into separated files
@@ -40,7 +40,7 @@ const myFeature = {
   do (data) {
     return new Promise((resolve, reject) => {
       // Do some operation
-      resolve(data)
+      resolve(data);
     })
   }
 };

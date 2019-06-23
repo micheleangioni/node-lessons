@@ -8,7 +8,7 @@
 In our case, in order to gain confidence with middlewares, let's add a middleware which simply logs each incoming request to our application.
 
 **Goals**
-- Every time the Web Server is hit, a log to file must be written by using [winstone](https://github.com/winstonjs/winston), containing the timestamp, the request method and url. Winstone must be used in a global Express application middleware
+- Every time the Web Server is hit, a log to file must be written by using [winston](https://github.com/winstonjs/winston), containing the timestamp, the request method and url. Winston must be used in a global Express application middleware
 
 **Allowed Npm Packages**
 - `express`: web server
@@ -23,7 +23,7 @@ In our case, in order to gain confidence with middlewares, let's add a middlewar
 **Suggestions**
 - Use `moment` to handle a proper date format to be logged into file
 
-- Follow the instructions in the readme of the Winstone's GitHub project page to setup a basic logger
+- Follow the instructions in the readme of the Winston's GitHub project page to setup a basic logger
 
 - A global middleware, which will run on all incoming requests, can be defined like so (**before** the routes definition):
 
@@ -31,6 +31,6 @@ In our case, in order to gain confidence with middlewares, let's add a middlewar
 app.use((req, res, next) => {
   // Code that runs at every request coming to our application
 
-  next()
+  next();
 });
 ```

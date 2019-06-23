@@ -69,7 +69,7 @@ module.exports = (app) => {
       return;
     }
 
-    next()
+    next();
   });
 
   /**
