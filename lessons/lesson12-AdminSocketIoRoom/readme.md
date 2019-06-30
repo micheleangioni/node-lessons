@@ -52,7 +52,7 @@ app.options('*', cors({
 - `axios`: http client used to perform http requests
 - `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
-- `commander`: library to build NodeJs CLI commands
+- `commander`: library to build Node.js CLI commands
 - `cors`: CORS configuration for Express
 - `express`: web server
 - `jsonwebtoken`: create and verify Json Web Tokens
@@ -60,7 +60,7 @@ app.options('*', cors({
 - `mongoose`: MongoDB client
 - `nconf`: configuration files manager
 - `node-uuid`: library to generate uuids
-- `redis`: NodeJs Redis client
+- `redis`: Node.js Redis client
 - `socket.io`: Web Socket management library
 - `validator`: string validation library
 - `winston`: logger

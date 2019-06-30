@@ -11,7 +11,7 @@ This is called **token invalidation**.
 We then need database to store the list of invalidated tokens.
 One of the most suitable solution is to use the in-memory database [Redis](https://redis.io/), which guarantees a super-fast and reliable access to its database.
 
-A [NodeJs client](https://github.com/NodeRedis/node_redis) is of course available.
+A [Node.js client](https://github.com/NodeRedis/node_redis) is of course available.
 Let's build a `Redis` wrapper class around it in `libraries/redis.js` and place in it all methods which communicate with the Redis server.
 
 Instead of storing in Redis the token itself, which is usually pretty long, let's add a [uuid](https://en.wikipedia.org/wiki/Universally_unique_identifier) to the token payload during its creation.
@@ -42,7 +42,7 @@ Remember to modify the Authentication checker middleware, created in Lesson 8, i
 - `mongoose`: MongoDB client
 - `nconf`: configuration files manager
 - `node-uuid`: library to generate uuids
-- `redis`: NodeJs Redis client
+- `redis`: Node.js Redis client
 - `validator`: string validation library
 - `winston`: logger
 

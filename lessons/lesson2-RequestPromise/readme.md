@@ -1,13 +1,13 @@
 # Node Lessons
 
-### Lesson 2: Use 'request-promise' instead of NodeJs' 'https' as HTTP client
+### Lesson 2: Use 'request-promise' instead of Node.js' 'https' as HTTP client
 
 **Description**
-NodeJs' `https` module is quite low level, so it requires some manual tweaking.
+Node.js' `https` module is quite low level, so it requires some manual tweaking.
 In comparison, [request-promise](https://github.com/request/request-promise) has a much simpler API and can be used to simplify our program.
 Let's use it in place of `https`.
 
-Additionally, let's wrap all NodeJs functions, which use callbacks, into custom functions which return a Promise.
+Additionally, let's wrap all Node.js functions, which use callbacks, into custom functions which return a Promise.
 
 **Goals**
 - Simplify the http client code by using `request-promise` in place of `https`

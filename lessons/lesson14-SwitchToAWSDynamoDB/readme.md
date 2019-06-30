@@ -51,7 +51,7 @@ if (process.env.NODE_ENV !== 'production') {
 - `aws-sdk`: Amazon Web Services client
 - `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
-- `commander`: library to build NodeJs CLI commands
+- `commander`: library to build Node.js CLI commands
 - `cors`: CORS configuration for Express
 - `dotenv`: load variables from an .env file
 - `dynamoose`: DynamoDB client
@@ -60,7 +60,7 @@ if (process.env.NODE_ENV !== 'production') {
 - `moment`: date manager
 - `nconf`: configuration files manager
 - `node-uuid`: library to generate uuids
-- `redis`: NodeJs Redis client
+- `redis`: Node.js Redis client
 - `socket.io`: Web Socket management library
 - `validator`: string validation library
 - `winston`: logger
@@ -149,7 +149,7 @@ router.post('/', (req, res) => {
 
 ```
 
-- `dynamoose` uses the NodeJs callback format. It can be handy to [promisify](https://hackernoon.com/node8s-util-promisify-is-so-freakin-awesome-1d90c184bf44) its methods, for example:
+- `dynamoose` uses the Node.js callback format. It can be handy to [promisify](https://hackernoon.com/node8s-util-promisify-is-so-freakin-awesome-1d90c184bf44) its methods, for example:
 
 ```js
 const UsersModel = req.app.get('usersModel');

@@ -3,25 +3,35 @@
 ### Lesson 6: Use Mongoose to connect to a Mongo database
 
 **Description**
-It is now time to add some persistence to our application. NodeJs is often used in combination with NoSQL databases, such as [MongoDB](https://www.mongodb.com/).
+It is now time to add some persistence to our application. Node.js is often used in combination with NoSQL databases, such as [MongoDB](https://www.mongodb.com/).
 
 This lesson requires a basic knowledge about MongoDB.
 In particular, the concept of collections and how they differ from traditional tables of relational databases.
 
-The most used NodeJs MongoDB client is [Mongoose](https://github.com/Automattic/mongoose).
+The most used Node.js MongoDB client is [Mongoose](https://github.com/Automattic/mongoose).
 Let's use it to connect to the MongoDB server.
 
-Mongoose allows also to define our MongoDB collection [schemas](http://mongoosejs.com/docs/guide.html).
+Mongoose also allows to define our MongoDB collection [schemas](http://mongoosejs.com/docs/guide.html).
 Let's define a `users` collection as defined in the requirement section.
 
 Connecting to the MongoDB server requires certain variables such as the MongoDB database name and the user credentials (username and password).
-We must **not** hardcode these variables into the code, but instead we should save it into a file which won't be added to the Version Control System (git).
+We must **not** hardcode these variables into the code, but instead we should save it into a file (eg. `config/secrets.json`) which won't be added to the Version Control System (git).
 
-In order to provide a blueprint of this file, so that anyone cloning the repo will still know which variables this file needs to contain,
-let's add a `config/secrets.json.example` file to VCS with example values (see he suggestions paragraph).
-The copy the just created file into a new `config/secrets.json` file and add it to the `.gitignore` file. Then fill in the appropriated values.
+In order to provide a blueprint of this file, so that anyone cloning the repo will know which variables needs to be specified in it,
+let's add a `config/secrets.json.example` file to VCS with example values (see the suggestions paragraph for the file content).
+Then copy the just created file into a new `config/secrets.json` file and add it to the `.gitignore` file. Last, fill in the appropriated values to connect to MongoDB.
 
-In order to then load those variables into the application, let's use [nconf](https://github.com/indexzero/nconf).
+In order to load these variables into the application, let's use [nconf](https://github.com/indexzero/nconf).
+
+The next step is to define a schema of the `users` collection. 
+The Mongoose documentation clearly explains how to do it in the [schema definition rules](https://mongoosejs.com/docs/guide.html#definition).
+
+Let's create a users schema following the Mongoose guide (see the requirements section for the needed fields).
+Once the schema is created, connect it to the `users` collection and create a User model by using
+
+`const UserModel = mongoose.model('users', users);`
+
+Now we can add the UserModel to the Express instance (see last suggestion).
 
 **Goals**
 - Add a json configuration file to store MongoDB variables
@@ -70,21 +80,22 @@ In order to then load those variables into the application, let's use [nconf](ht
 
 it just contains all the needed variable to connect to the MongoDB server.
 
-- To connect to the MongoDB client by using the variables read through `nconf`, use
+- To connect to the MongoDB client by using the variables read through `nconf`, which can be directly imported, use
 
 ```js
 // mongoose.js
 
-[...]
+const mongoose = require('mongoose');
+const nconf = require('nconf');
 
 mongoose.connect(
   `${nconf.get('db_adapter')}://${nconf.get('db_username')}:${nconf.get('db_password')}@${nconf.get('db_host')}:${nconf.get('db_port')}/${nconf.get('db_name')}`, {})
   .catch(e => {
-    console.log(e)
+    console.log(e);
   });
 
-[...]
+module.exports = mongoose;
 ```
 
-- To make variables (such as objects) available in the Express application, use `app.set('name', variable);`.
+- To make variables (such as objects) available in the Express application (i.e. adding them to the Express instance), use `app.set('name', variable);`.
   For example `app.set('mongooseClient', mongoose);` will make the `mongoose` variable available through the `mongooseClient` key. To retrieve it, just use `app.get('mongooseClient')` afterwards

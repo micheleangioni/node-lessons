@@ -12,7 +12,7 @@ Unlike used in our application currectly up to now, the easiest way to load the 
 
 1. Providing the variables directly from the CLI when starting the application `AWS_ACCESS_KEY_ID=your_access_key AWS_SECRET_ACCESS_KEY=your_secret_key AWS_REGION=eu-central-1 node index.js`
 
-2. Loading the variables from an `.env` file through [dotenv](https://github.com/motdotla/dotenv), which reads an env file and loads the variables directly into the NodeJs `process.env` variable
+2. Loading the variables from an `.env` file through [dotenv](https://github.com/motdotla/dotenv), which reads an env file and loads the variables directly into the Node.js `process.env` variable
 
 We will opt for the second way. Let's replicate then the `secrets.json` / `secrets.json.example` files and create the `.env` (which must be gitignored) and `.env.example` files and place them in the `config` folders as well:
   ```
@@ -24,7 +24,7 @@ We will opt for the second way. Let's replicate then the `secrets.json` / `secre
   ```
   Then use `dotenv` to load the file at the very beginning of the code of our `index.js` file.
 
-Create then a `s3client.js` file in the `libraries` folder, which will act as a wrapper of [NodeJs AWS client `aws-sdk`](https://github.com/aws/aws-sdk-js). We need methods to
+Create then a `s3client.js` file in the `libraries` folder, which will act as a wrapper of [Node.js AWS client `aws-sdk`](https://github.com/aws/aws-sdk-js). We need methods to
     1. Create a bucket with CORS permissions
     2. Retrieve a signed url (see suggestions)
 
@@ -45,7 +45,7 @@ This would also avoid to hardcode the image url in our application.
 - `aws-sdk`: Amazon Web Services client
 - `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
-- `commander`: library to build NodeJs CLI commands
+- `commander`: library to build Node.js CLI commands
 - `cors`: CORS configuration for Express
 - `dotenv`: load variables from an .env file
 - `express`: web server
@@ -54,7 +54,7 @@ This would also avoid to hardcode the image url in our application.
 - `mongoose`: MongoDB client
 - `nconf`: configuration files manager
 - `node-uuid`: library to generate uuids
-- `redis`: NodeJs Redis client
+- `redis`: Node.js Redis client
 - `socket.io`: Web Socket management library
 - `validator`: string validation library
 - `winston`: logger
@@ -178,7 +178,7 @@ This would also avoid to hardcode the image url in our application.
     [...]
     ```
 
-- Several tutorials which show how to correctly integrate AWS S3 service into a NodeJs application are available on the web.
+- Several tutorials which show how to correctly integrate AWS S3 service into a Node.js application are available on the web.
     One that I find really well written is [Heroku's one](https://devcenter.heroku.com/articles/s3-upload-node), from which I've personally taken inspiration writing this lesson
 
 

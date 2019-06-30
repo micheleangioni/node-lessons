@@ -20,14 +20,14 @@ which takes the email of a user and turns it into ad admin setting the `admin` f
 - `axios`: http client used to perform http requests
 - `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
-- `commander`: library to build NodeJs CLI commands
+- `commander`: library to build Node.js CLI commands
 - `express`: web server
 - `jsonwebtoken`: create and verify Json Web Tokens
 - `moment`: date manager
 - `mongoose`: MongoDB client
 - `nconf`: configuration files manager
 - `node-uuid`: library to generate uuids
-- `redis`: NodeJs Redis client
+- `redis`: Node.js Redis client
 - `socket.io`: Web Socket management library
 - `validator`: string validation library
 - `winston`: logger
@@ -96,4 +96,4 @@ let program = require('commander');
 [...]
 ```
 
-- Sometimes in order to end a NodeJs process, it is necessary to explicitily call `process.exit(0)`
+- Sometimes in order to end a Node.js process, it is necessary to explicitily call `process.exit(0)`

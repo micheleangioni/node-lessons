@@ -283,7 +283,7 @@ so that on the socket.io's `adminStatisticsRequest` event the jobs statistics mu
 - `aws-sdk`: Amazon Web Services client
 - `bcryptjs`: password hasher
 - `body-parser`: Express middleware to parse the body requests
-- `commander`: library to build NodeJs CLI commands
+- `commander`: library to build Node.js CLI commands
 - `cors`: CORS configuration for Express
 - `dotenv`: load variables from an .env file
 - `dynamoose`: DynamoDB client
@@ -292,7 +292,7 @@ so that on the socket.io's `adminStatisticsRequest` event the jobs statistics mu
 - `moment`: date manager
 - `nconf`: configuration files manager
 - `node-uuid`: library to generate uuids
-- `redis`: NodeJs Redis client
+- `redis`: Node.js Redis client
 - `socket.io`: Web Socket management library
 - `validator`: string validation library
 - `winston`: logger

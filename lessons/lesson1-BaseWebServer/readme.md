@@ -5,7 +5,7 @@
 **Description**
 In this first lesson we need to build a simple GitHub Jobs inspector. Through the use of [Express](https://expressjs.com), a Web Server with a single Endpoint should be created, which allows to look for Jobs through their public API, by filtering for location and full/part time, and returning the results as a Json request, after having saved them into a file.
 
-As first step, let's use the NodeJs [https](https://nodejs.org/api/https.html) API to retrieve the Jobs list and [https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback](fs.writeFile()) to save it to a `userdata/data.json` file.
+As first step, let's use the Node.js [https](https://nodejs.org/api/https.html) API to retrieve the Jobs list and [https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback](fs.writeFile()) to save it to a `userdata/data.json` file.
 
 Our Endpoint should then optionally support also the `location` and `full_time` query parameters. 
 The application should use them in the call to the GitHub API call in order to retrieve, and return only the wanted jobs.

@@ -1,4 +1,4 @@
-const express = require('express'); // NodeJs Web Server
+const express = require('express'); // Node.js Web Server
 const app = express(); // Main Express application object
 
 const retrieveJobs = (req, res) => {

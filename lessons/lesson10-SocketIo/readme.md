@@ -3,10 +3,10 @@
 ### Lesson 10: Add Web Sockets with SocketIo
 
 **Description**
-One of the strong points of NodeJs is its easiness to setup a [Web Socket](https://en.wikipedia.org/wiki/WebSocket) server and its endpoints.
+One of the strong points of Node.js is its easiness to setup a [Web Socket](https://en.wikipedia.org/wiki/WebSocket) server and its endpoints.
 If fact, nowadays every modern Web or Mobile Application makes use of Web Sockets to provide an ehnanced and more immersive User Experience.
 
-Probably the most used NodeJs library to setup Web Sockets is [socket.io](https://github.com/socketio/socket.io), which makes straightforward to handle the communication between two entities (usually server and client) through Web Sockets and additionally provides useful features to allow more complex patterns and the realization of sophisticated Web and Mobile Applications.
+Probably the most used Node.js library to setup Web Sockets is [socket.io](https://github.com/socketio/socket.io), which makes straightforward to handle the communication between two entities (usually server and client) through Web Sockets and additionally provides useful features to allow more complex patterns and the realization of sophisticated Web and Mobile Applications.
 
 Let's add then a `/random-jobs` endpoint which opens a Web Socket connection with a client.
 It will then automatically emit an event `randomJob` to the consumer (i.e. the connected client) with a random job taken from the public Github Jobs API.
@@ -31,7 +31,7 @@ In order to test the backend API, you can use [serve](https://github.com/zeit/se
 - `mongoose`: MongoDB client
 - `nconf`: configuration files manager
 - `node-uuid`: library to generate uuids
-- `redis`: NodeJs Redis client
+- `redis`: Node.js Redis client
 - `socket.io`: Web Socket management library
 - `validator`: string validation library
 - `winston`: logger
@@ -73,7 +73,7 @@ In order to test the backend API, you can use [serve](https://github.com/zeit/se
 - The `/random-jobs` endpoint must listen for a `jobRequest` endpoint and a `location` data and emit a `randomJob` event with a random job data for the requested location
 
 **Suggestions**
-- Since `socket.io` requires an instance of the NodeJs `http` server, modify your starting `index.js` file to use it
+- Since `socket.io` requires an instance of the Node.js `http` server, modify your starting `index.js` file to use it
 
 ```js
 // index.js
