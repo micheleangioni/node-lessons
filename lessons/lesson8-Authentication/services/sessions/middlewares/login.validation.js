@@ -13,11 +13,11 @@ module.exports = async (req, res, next) => {
 
   if (!data.email || !data.password) {
     if (!data.email) {
-      errors.push('The Email is missing.')
+      errors.push('The Email is missing.');
     }
 
     if (!data.password) {
-      errors.push('The Password is missing.')
+      errors.push('The Password is missing.');
     }
   } else {
     // Check whether the User exists
@@ -52,7 +52,7 @@ module.exports = async (req, res, next) => {
   }
 
   if (errors.length > 0) {
-    res.status(error.code).json({ hasError: 1, error: errors.join(' ') });
+    res.status(422).json({ hasError: 1, error: errors.join(' ') });
     return;
   }
 

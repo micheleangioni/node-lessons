@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
   let payload;
 
   try {
-    payload = jwtManager.verify(token)
+    payload = jwtManager.verify(token);
   } catch(error) {
     /*
     error object structure:

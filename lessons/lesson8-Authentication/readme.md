@@ -5,6 +5,7 @@
 **Description**
 Handling Authentication is probably the most critical part of most applications.
 Every error or bug where authentication is involved could lead to a hack or the website or a leak of private / sensible information.
+Managing all required steps to properly secure an application is not straightforward and involves many battle tested techniques which are important to learn.
 
 In this lesson we will build an Authentication system using [Json Web Tokens (JWT)](https://slides.com/micheleangioni/authentication-tokens).
 
@@ -13,10 +14,33 @@ For this purpose we will use the [jsonwebtoken](https://github.com/auth0/node-js
 
 Our Authentication system will then be composed of two parts:
 
-1. In the login route, after validating the user credentials, a new token must be created and added to the response as `Authentication` header
+1. In the login route, after validating the user credentials in a login validation middleware, a new token must be created and added to the response as `Authentication` header
+
 ```js
-router.post('/', (req, res) => {
-    // Create a new token and save it in a 'token' variable
+// services/sessions/middlewares/login.validation.js
+
+module.exports = async (req, res, next) => {
+  // Get email and password from the request body
+  [...]
+  
+  // Fetch the User by email by using the UserRepo
+  [...]
+  
+  // Check the password is correct via the 'jsonwebtoken' package
+  [...]
+
+  // If the User exists, create a new token and save it into the req object (see suggestions)
+  [...]
+  
+  next();
+};
+```
+
+```js
+// services/sessions/sessions.router.js
+
+router.post('/', loginValidation, (req, res) => {
+    // Get token from the req object (see suggestions)
 
     res.set('Authorization', `Bearer ${token}`);
 
@@ -25,7 +49,29 @@ router.post('/', (req, res) => {
 ```
 this will be read and stored by the client and sent back to each subsequent request to the server. The response will send back the data of the logged in User
 
-2. A middleware which acts on each protected route (i.e. each route which needs an authenticated user to be accessed) and check whether the request has a valid token
+2. A middleware which acts on each protected route (i.e. each route which needs an authenticated user to be accessed) will check whether the request has a valid token.
+```js
+// services/sessions/middlewares/auth.check.js
+
+module.exports = async (req, res, next) => {
+  // Check whether the Authorization header is present
+  [...]
+  
+  // Verify the token via
+  let payload;
+  
+  try {
+      payload = jwtManager.verify(token);
+    } catch(error) {  
+      // TODO Return error via res.json()
+    }
+  
+  // Save the userId in the req object (see suggestions)
+  [...]
+  
+  next();
+};
+```
 
 **Goals**
 - Build a `(POST) /sessions` API Endpoint to perform User login. A Json Web Token (JWT) must be returned upon successful authentication
@@ -68,7 +114,7 @@ this will be read and stored by the client and sent back to each subsequent requ
 - JWT management (creation and verification) must be handled in `libraries/jwtManager.js`, which must export a Javascript **Class**. It must be available in Express under the `jwtManager` key
 - The Secret Key used to create the tokens must be stored in the `secrets.json` file
 - `/sessions` routes must be defined in `services/sessions/sessions.router.js`
-- `/users` API Endpoints must check for authenticated users through the use of a `auth.check.js` function or middleware
+- `/users` API Endpoints must check for authenticated users through the use of a `services/sessions/middlewares/auth.check.js` middleware
 - HTTP Status Codes must be coherent: 401 if no authentication is provided (i.e. token not found in the `Authorization` header, 403 if the token is expired or invalid
 
 **Suggestions**
@@ -104,12 +150,12 @@ module.exports = function (myvariable) {
 };
 ```
 
-- When creating a token, remember to save the userId into the `sub` payload field. It can be set with the `subject` key in the `options` parameter of the `sign()` method of the `jsonwebtoken` package
+- When creating a new token, remember to save the userId into the `sub` payload field. It can be set with the `subject` key in the `options` parameter of the `sign()` method of the `jsonwebtoken` package
 
 ```js
 
 // jwt.sign(payload, secretOrPrivateKey, [options, callback])
-jwt.sign({
+const newToken = jwt.sign({
   data: {}
 }, 'my secret key stored in /config/secrets.json', {
   expiresIn: '4h',
@@ -120,7 +166,7 @@ jwt.sign({
 - When checking for login validation, in case of success it is useful to save the authenticated user id and user data into the request, so that it is available later
 
 ```js
-// login.validation.js
+// services/sessions/middlewares/login.validation.js
 
 module.exports = async (req, res, next) => {
   if (!req.context) {
@@ -142,7 +188,7 @@ module.exports = async (req, res, next) => {
 ```
 
 ```js
-// sessions.router.js
+// services/sessions/sessions.router.js
 
 [...]
 
@@ -158,7 +204,7 @@ router.post('/', (req, res) => {
 - Let's save the user id also in the auth check function
 
 ```js
-// auth.check.js
+// services/sessions/middlewares/auth.check.js
 
 module.exports = async (app, data, context) => {
   [...] // Check whether the user is authenticated

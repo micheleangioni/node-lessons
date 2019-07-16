@@ -85,7 +85,7 @@ This would also avoid to hardcode the image url in our application.
 - JWT management (creation and verification) must be handled in `libraries/jwtManager.js`, which must export a Javascript **Class**. It must be available in Express under the `jwtManager` key
 - The Secret Key used to create the tokens must be stored in the `secrets.json` file
 - `/sessions` routes must be defined in `services/sessions/sessions.router.js`
-- `/users` API Endpoints must check for authenticated users through the use of a `auth.check.js` middleware
+- `/users` API Endpoints must check for authenticated users through the use of a `services/sessions/middlewares/auth.check.js` middleware
 - HTTP Status Codes must be coherent: 401 is no authentication is provided, 403 is the token is expired or invalid
 - Communication with Redis server must happen entirely inside `libraries/redis.js` which must export a Javascript **Class**. It must be available in Express under the `redisClient` key
 - The `Redis` class constructor must take the Redis password as an argument, which must be saved into the `config/secrets.json` file. All methods inside `libraries/redis.js` must return a Promise

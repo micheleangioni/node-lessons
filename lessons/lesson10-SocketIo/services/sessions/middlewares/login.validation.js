@@ -52,7 +52,7 @@ module.exports = async (req, res, next) => {
   }
 
   if (errors.length > 0) {
-    res.status(error.code).json({ hasError: 1, error: errors.join(' ') });
+    res.status(422).json({ hasError: 1, error: errors.join(' ') });
     return;
   }
 

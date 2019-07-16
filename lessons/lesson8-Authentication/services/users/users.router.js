@@ -27,17 +27,17 @@ module.exports = (app) => {
       let status;
 
       switch (error.name) {
-        case 'UserNotAuthenticated':
-          status = 401;
-          break;
-        case 'TokenExpiredError':
-          status = 403;
-          break;
-        case 'JsonWebTokenError':
-          status = 403;
-          break;
-        default:
-          status = 500;
+      case 'UserNotAuthenticated':
+        status = 401;
+        break;
+      case 'TokenExpiredError':
+        status = 403;
+        break;
+      case 'JsonWebTokenError':
+        status = 403;
+        break;
+      default:
+        status = 500;
       }
 
       res.status(status).json({ hasError: 1, message: error.message });
@@ -56,7 +56,7 @@ module.exports = (app) => {
         res.json(data.map(user => {
           return { id: user._id, email: user.email, username: user.username };
         }));
-      })
+      });
   });
 
   // Validation Middleware.
