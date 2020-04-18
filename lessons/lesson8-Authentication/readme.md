@@ -26,10 +26,10 @@ module.exports = async (req, res, next) => {
   // Fetch the User by email by using the UserRepo
   [...]
   
-  // Check the password is correct via the 'jsonwebtoken' package
+  // Check the password is correct via the 'bcrypt' package
   [...]
 
-  // If the User exists, create a new token and save it into the req object (see suggestions)
+  // If the User exists, save user into the req object (see suggestions)
   [...]
   
   next();
