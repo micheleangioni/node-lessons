@@ -40,7 +40,7 @@ module.exports = async (req, res, next) => {
 // services/sessions/sessions.router.js
 
 router.post('/', loginValidation, (req, res) => {
-    // Get token from the req object (see suggestions)
+    // Get user id from the req object and create token using 'jsonwebtoken' (see suggestions)
 
     res.set('Authorization', `Bearer ${token}`);
 
