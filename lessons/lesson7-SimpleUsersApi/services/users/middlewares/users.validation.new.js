@@ -51,7 +51,7 @@ module.exports = async (req, res, next) => {
   if (!data.password) {
     errors.push('The password is missing.');
   } else {
-    // Check whether the it is valid
+    // Check whether the password is valid
     if (data.password.length < 8 || data.password.length > 50) {
       errors.push('The password must be at least 8 and not more than 50 characters long');
     }
