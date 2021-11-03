@@ -30,7 +30,7 @@
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "socket.io": "^2.0.4",
-    "validator": "^9.4.1",
+    "validator": "^13.7.0",
     "winston": "^2.4.0"
   },
   "devDependencies": {
