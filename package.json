@@ -20,7 +20,7 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "dynamoose": "^0.8.7",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.2.0",
     "moment": "^2.20.1",
     "mongoose": "^5.0.6",
